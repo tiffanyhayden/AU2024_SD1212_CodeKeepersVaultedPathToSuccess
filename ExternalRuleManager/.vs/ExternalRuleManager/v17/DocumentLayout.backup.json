@@ -1,10 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\TiffanyHayden\\source\\repos\\ExternalRuleManager\\",
+  "WorkspaceRootPath": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\source\\repos\\externalrulemanager\\externalrulemanager\\externalrulemanager.x.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager\\externalrulemanager\\externalrulemanager.x.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\externalrulemanager.x.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager\\externalrulemanager\\autodesk.externalrulemanager.inventor.addin||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\autodesk.externalrulemanager.inventor.addin||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,13 +26,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Autodesk.ExternalRuleManager.Inventor.addin",
+              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager\\ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "RelativeDocumentMoniker": "ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager\\ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "RelativeToolTip": "ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000072|",
+              "WhenOpened": "2024-08-30T13:42:11.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ExternalRuleManager.X.manifest",
-              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\source\\repos\\ExternalRuleManager\\ExternalRuleManager\\ExternalRuleManager.X.manifest",
+              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager\\ExternalRuleManager\\ExternalRuleManager.X.manifest",
               "RelativeDocumentMoniker": "ExternalRuleManager\\ExternalRuleManager.X.manifest",
-              "ToolTip": "C:\\Users\\TiffanyHayden\\source\\repos\\ExternalRuleManager\\ExternalRuleManager\\ExternalRuleManager.X.manifest",
+              "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager\\ExternalRuleManager\\ExternalRuleManager.X.manifest",
               "RelativeToolTip": "ExternalRuleManager\\ExternalRuleManager.X.manifest",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001203|",
               "WhenOpened": "2024-08-30T13:01:10.062Z",
               "EditorCaption": ""
