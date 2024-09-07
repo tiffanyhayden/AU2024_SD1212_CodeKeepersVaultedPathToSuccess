@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExternalRuleManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a06c622a7557a8a4af2e1d0a54f7532f77676d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d92f994d661ef4bb4241ae0cad2534eb76f77419")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExternalRuleManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExternalRuleManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

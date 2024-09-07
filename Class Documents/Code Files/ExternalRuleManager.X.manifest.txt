@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+
+  <assemblyIdentity name="ExternalRuleManager" version="1.0.0.0"></assemblyIdentity>
+
+  <clrClass clsid="{472DC0BC-8D55-4A5F-99AC-56DD17F66771}" progid="ExternalRuleManager.StandardAddInServer" threadingModel="Both" name="ExternalRuleManager.StandardAddInServer" runtimeVersion=""></clrClass>
+
+  <file name="ExternalRuleManager.dll" hashalg="SHA1"></file>
+
+</assembly>
