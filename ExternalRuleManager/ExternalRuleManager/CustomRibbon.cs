@@ -1,4 +1,5 @@
-﻿using Inventor;
+﻿using ExternalRuleManager.Properties;
+using Inventor;
 
 namespace ExternalRuleManager
 {
@@ -29,8 +30,8 @@ namespace ExternalRuleManager
         /// </summary>
         public CustomRibbon()
         {
-            Image image16x16 = ByteArrayToImage(Properties.Resources._16x16);
-            Image image32x32 = ByteArrayToImage(Properties.Resources._32x32);
+            Image image16x16 = ByteArrayToImage(Resources._16x16);
+            Image image32x32 = ByteArrayToImage(Resources._32x32);
 
             TestButton = Utilities.CreateButtonDef("TestButton", "TestButton", "", image16x16, image32x32);
             TestButton.OnExecute += ExecuteTestButton;
