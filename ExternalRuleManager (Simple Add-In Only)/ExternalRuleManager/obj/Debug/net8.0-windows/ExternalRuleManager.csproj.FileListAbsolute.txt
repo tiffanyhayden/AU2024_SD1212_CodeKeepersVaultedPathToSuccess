@@ -24,3 +24,16 @@ C:\ProgramData\Autodesk\Inventor Addins\ExternalRuleManager\net8.0-windows\Autod
 C:\ProgramData\Autodesk\Inventor Addins\ExternalRuleManager\net8.0-windows\ExternalRuleManager.deps.json
 C:\ProgramData\Autodesk\Inventor Addins\ExternalRuleManager\net8.0-windows\ExternalRuleManager.dll
 C:\ProgramData\Autodesk\Inventor Addins\ExternalRuleManager\net8.0-windows\ExternalRuleManager.pdb
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.csproj.AssemblyReference.cache
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.Properties.Resources.resources
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.csproj.GenerateResource.cache
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.AssemblyInfoInputs.cache
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.AssemblyInfo.cs
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.csproj.CoreCompileInputs.cache
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.sourcelink.json
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\External.CDEC376D.Up2Date
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.dll
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\refint\ExternalRuleManager.dll
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ExternalRuleManager.pdb
+C:\Users\TiffanyHayden\Documents\GitHub\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\ExternalRuleManager (Simple Add-In Only)\ExternalRuleManager\obj\Debug\net8.0-windows\ref\ExternalRuleManager.dll
