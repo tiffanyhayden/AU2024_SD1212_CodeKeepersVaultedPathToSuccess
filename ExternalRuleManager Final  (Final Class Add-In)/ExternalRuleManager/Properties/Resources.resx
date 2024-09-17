@@ -124,19 +124,46 @@
   <data name="_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="check-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\check-out.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckIn_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckIn_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="reverse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\reverse.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckIn_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckIn_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="check-in" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\check-in.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckOut_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckOut_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="checkin_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\checkin_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckOut_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckOut_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="checkin_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\checkin_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Get_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Get_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Get_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Get_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Overwrite_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Overwrite_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Overwrite_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Overwrite_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Refresh_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Refresh_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Refresh_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Refresh_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Copy_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Copy_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Copy_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Copy_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UndoCheckout_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UndoCheckout_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UndoCheckout_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UndoCheckout_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

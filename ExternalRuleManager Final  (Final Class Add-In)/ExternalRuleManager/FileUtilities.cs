@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VDF = Autodesk.DataManagement.Client.Framework;
 using ACW = Autodesk.Connectivity.WebServices;
 using File = System.IO.File;
+using System.Diagnostics;
 
 namespace ExternalRuleManager
 {
@@ -59,7 +60,15 @@ namespace ExternalRuleManager
                     {
                         if (!File.Exists(destPath))
                         {
+                            
+
                             File.Copy(sourceFile, destPath);
+                            FileInfo fileInfo = new FileInfo(destPath);
+                            if (fileInfo.IsReadOnly)
+                            {
+                                fileInfo.IsReadOnly = false;
+                            }
+
                             Console.WriteLine($"File copied successfully to {destPath}");
                         }
                         else
@@ -74,7 +83,7 @@ namespace ExternalRuleManager
                 }
                 else
                 {
-                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist.", "External Rule Manager");
+                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist on disk.", "External Rule Manager");
                 }
             }
             catch (Exception ex)
@@ -116,6 +125,7 @@ namespace ExternalRuleManager
                     string destFile = $"{pathWithoutExt}_{username}{System.IO.Path.GetExtension(sourceFile)}";
                     string folderPath = filePathAbs.FolderPath;
                     string destPath = System.IO.Path.Combine(folderPath, destFile);
+                    Debug.Print(destPath);
 
                     // Ensure destination folder is valid
                     if (!Directory.Exists(folderPath))
@@ -127,12 +137,11 @@ namespace ExternalRuleManager
                     // Try to copy the file
                     try
                     {
-                        if (!File.Exists(destPath))
+                        if (File.Exists(destPath))
                         {
                             if(VaultFileUtilities.File_IsCheckedOut(file.Name))
                             {
-                                File.Delete(sourceFile);
-                                File.Move(destFile, sourceFile);
+                                ReplaceFile(destPath, sourceFile);
 
                             }
                             else
@@ -141,8 +150,7 @@ namespace ExternalRuleManager
 
                                 if(result == DialogResult.Yes)
                                 {
-                                    File.Delete(sourceFile);
-                                    File.Move(destFile, sourceFile);
+                                    ReplaceFile(destPath, sourceFile);
 
                                 }
                             }
@@ -159,12 +167,38 @@ namespace ExternalRuleManager
                 }
                 else
                 {
-                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist.", "External Rule Manager");
+                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist on disk.", "External Rule Manager");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Unexpected error: {ex.Message}", "External Rule Manager");
+            }
+        }
+
+        private static void ReplaceFile(string sourceFile, string targetFile)
+        {
+            try
+            {
+                FileInfo targetFileInfo = new FileInfo(targetFile);
+
+                // Ensure the target file is not read-only
+                if (targetFileInfo.IsReadOnly)
+                {
+                    targetFileInfo.IsReadOnly = false;
+                }
+
+                // Use File.Replace for an atomic operation
+                File.Replace(sourceFile, targetFile, null); // The third parameter is for a backup file if needed
+                Console.WriteLine($"Replaced '{targetFile}' with '{sourceFile}' successfully.");
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show($"Target file not found: {ex.Message}", "External Rule Manager");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"I/O error during file replace: {ex.Message}", "External Rule Manager");
             }
         }
 

@@ -29,7 +29,7 @@ namespace ExternalRuleManager
 
             {
                 //Add message box for user maybe? 
-                return null;
+                return existingDef;
             }
 
             IPictureDisp iPic16 = null;
@@ -88,6 +88,32 @@ namespace ExternalRuleManager
 
         }
 
+        public static bool ButtonDefExist( string InternalName)
+        {
+
+            Inventor.ButtonDefinition? existingDef = null;
+
+            try
+            {
+                existingDef = Globals.InvApp.CommandManager.ControlDefinitions[InternalName] as ButtonDefinition;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            if (existingDef != null)
+
+            {
+                //Add message box for user maybe? 
+                return true;
+            }
+
+            return false;
+
+
+        }
+
         public static Inventor.ComboBoxDefinition CreateComboBoxDef(string DisplayName,
             string InternalName,
             CommandTypesEnum Classification,
@@ -132,6 +158,32 @@ namespace ExternalRuleManager
 
                 return null;
             }
+
+
+        }
+
+        public static bool ComboExist(string InternalName)
+        {
+
+            Inventor.ComboBoxDefinition? existingDef = null;
+
+            try
+            {
+                existingDef = Globals.InvApp.CommandManager.ControlDefinitions[InternalName] as ComboBoxDefinition;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            if (existingDef != null)
+
+            {
+                //Add message box for user maybe? 
+                return true;
+            }
+
+            return false;
 
 
         }

@@ -446,5 +446,46 @@ namespace ExternalRuleManager
 
 
         }
+
+
+        public static string File_GetLatest(string fileName)
+        {
+            // THIS FUNCTION "GETS" THE LATEST VERSION OF A FILE THAT IS AT A SPECIFIED LIFECYCLE STATE
+            try
+            {
+
+                // Check Vault connection
+                if (VaultConn.ActiveConnection == null)
+                {
+                    throw new InvalidOperationException("Vault connection is not active.");
+                }
+
+                // Get Vault services
+                ACW.DocumentService docService = VaultConn.ActiveConnection.WebServiceManager.DocumentService;
+                VDF.Vault.Services.Connection.IWorkingFoldersManager services = VaultConn.ActiveConnection.WorkingFoldersManager;
+
+                // Find file by name
+                ACW.File file = File_FindByFileName(fileName);
+                if (file == null)
+                {
+                    throw new InvalidOperationException($"File '{fileName}' not found.");
+                }
+
+                // Get file iteration and full file path
+                FileIteration fileIteration = new FileIteration(VaultConn.ActiveConnection, file);
+                string fullFileName = services.GetPathOfFileInWorkingFolder(fileIteration).FullPath;
+
+                // Acquire the file from Vault
+                File_Acquire(file, false);
+
+                return fullFileName;
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle invalid arguments
+                Console.WriteLine($"File_GetLatestLifecycleStateVersion Failed: {ex.Message}");
+                return "";
+            }
+        }
     }
 }

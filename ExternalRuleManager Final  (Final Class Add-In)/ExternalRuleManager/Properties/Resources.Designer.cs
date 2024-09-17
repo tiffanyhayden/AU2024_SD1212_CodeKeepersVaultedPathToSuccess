@@ -83,9 +83,9 @@ namespace ExternalRuleManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] check_in {
+        internal static byte[] CheckIn_16x16 {
             get {
-                object obj = ResourceManager.GetObject("check-in", resourceCulture);
+                object obj = ResourceManager.GetObject("CheckIn_16x16", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace ExternalRuleManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] check_out {
+        internal static byte[] CheckIn_32x32 {
             get {
-                object obj = ResourceManager.GetObject("check-out", resourceCulture);
+                object obj = ResourceManager.GetObject("CheckIn_32x32", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace ExternalRuleManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] checkin_16x16 {
+        internal static byte[] CheckOut_16x16 {
             get {
-                object obj = ResourceManager.GetObject("checkin_16x16", resourceCulture);
+                object obj = ResourceManager.GetObject("CheckOut_16x16", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace ExternalRuleManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] checkin_32x32 {
+        internal static byte[] CheckOut_32x32 {
             get {
-                object obj = ResourceManager.GetObject("checkin_32x32", resourceCulture);
+                object obj = ResourceManager.GetObject("CheckOut_32x32", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -123,9 +123,99 @@ namespace ExternalRuleManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] reverse {
+        internal static byte[] Copy_16x16 {
             get {
-                object obj = ResourceManager.GetObject("reverse", resourceCulture);
+                object obj = ResourceManager.GetObject("Copy_16x16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Copy_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Copy_32x32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Get_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Get_16x16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Get_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Get_32x32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Overwrite_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Overwrite_16x16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Overwrite_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Overwrite_32x32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Refresh_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Refresh_16x16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Refresh_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Refresh_32x32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] UndoCheckout_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("UndoCheckout_16x16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] UndoCheckout_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("UndoCheckout_32x32", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -21,12 +21,13 @@ namespace ExternalRuleManager
 
         public ButtonDefinition GetLatestAllRules { get; set; }
         public ButtonDefinition GetLatestReleasedAllRules { get; set; }
+        public ButtonDefinition Get { get; set; }
         public ButtonDefinition CheckIn { get; set; }
         public ButtonDefinition CheckOut { get; set; }
         public ButtonDefinition UndoCheckOut { get; set; }
         public ButtonDefinition MakeLocalCopy { get; set; }
         public ButtonDefinition OverwriteRuleOnDiskWithCopy { get; set; }
-
+        public ButtonDefinition Refresh { get; set; }
 
 
 
@@ -99,7 +100,7 @@ namespace ExternalRuleManager
 
             statusRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            lifecycleRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("LifeCycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            lifecycleRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Lifecycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
             LocalRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Local (C:)", "id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
@@ -124,13 +125,23 @@ namespace ExternalRuleManager
 
         #region Ui Events
 
+        private void Refresh_OnExecute(NameValueMap context)
+        {
+            if (isExternalRulesInitialized)
+            {
+                CreateAndLoadOtherButtons();
+            }
 
+        }
 
         private void ExternalRules_OnSelect(NameValueMap context)
         {
             if(isExternalRulesInitialized)
             {
                 CreateAndLoadOtherButtons();
+                RefreshUI();
+                
+                
             }
             
         }
@@ -155,6 +166,19 @@ namespace ExternalRuleManager
                 VaultFileUtilities.File_UndoCheckOut(selectedItemName);
             }
             
+        }
+
+        private void Get_OnExecute(NameValueMap context)
+        {
+
+            string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+            if (ExternalRules.ListIndex != 1)
+            {
+                ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
+
+                VaultFileUtilities.File_GetLatest(selectedItemName);
+            }
+
         }
 
         private void CheckOut_OnExecute(NameValueMap context)
@@ -242,88 +266,189 @@ namespace ExternalRuleManager
         }
 
 
+        public void RefreshUI()
+        {
+
+            string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+
+            if (ExternalRules.ListIndex == 1)
+            {
+                Get.Enabled = false;
+                CheckIn.Enabled = false;
+                CheckOut.Enabled = false;
+                MakeLocalCopy.Enabled = false;
+                OverwriteRuleOnDiskWithCopy.Enabled = false;
+                UndoCheckOut.Enabled = false;
+
+            }
+            else
+            {
+
+            }
+
+
+            //if (ExternalRules.ListIndex != 1)
+            //{
+            //    ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
+
+            //    VaultFileUtilities.File_CheckOut(file);
+            //}
+
+
+
+
+
+
+        }
+
+
         public void CreateAndLoadOtherButtons()
         {
 
             
             Image image16x16 = ByteArrayToImage(Resources._16x16);
             Image image32x32 = ByteArrayToImage(Resources._32x32);
-            Image checkIn16x16 = ByteArrayToImage(Resources.checkin_16x16);
-            Image checkIn32x32 = ByteArrayToImage(Resources.checkin_32x32);
+            Image checkIn16x16 = ByteArrayToImage(Resources.CheckIn_16x16);
+            Image checkIn32x32 = ByteArrayToImage(Resources.CheckIn_32x32);
+            Image checkOut16x16 = ByteArrayToImage(Resources.CheckOut_16x16);
+            Image checkOut32x32 = ByteArrayToImage(Resources.CheckOut_32x32);
+            Image undoCheckout16x16 = ByteArrayToImage(Resources.UndoCheckout_16x16);
+            Image undoCheckout32x32 = ByteArrayToImage(Resources.UndoCheckout_32x32);
+            Image copy16x16 = ByteArrayToImage(Resources.Copy_16x16);
+            Image copy32x32 = ByteArrayToImage(Resources.Copy_32x32);
+            Image get16x16 = ByteArrayToImage(Resources.Get_16x16);
+            Image get32x32 = ByteArrayToImage(Resources.Get_32x32);
+            Image overwrite16x16 = ByteArrayToImage(Resources.Overwrite_16x16);
+            Image overwrite32x32 = ByteArrayToImage(Resources.Overwrite_32x32);
+            Image refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
+            Image refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
 
 
 
-            GetLatestAllRules = Utilities.CreateButtonDef("Get Latest", "GetLatestAllRules", "", image16x16, image32x32);
 
-            if(GetLatestAllRules != null)
+
+            if (!Utilities.ButtonDefExist("Refresh"))
             {
-                allRulesRibbonPanel.CommandControls.AddButton(GetLatestAllRules);
-                GetLatestAllRules.OnExecute += GetLatestAllRules_OnExecute;
-            }
+                Refresh = Utilities.CreateButtonDef("Refresh", "Refresh", "", refresh16x16, refresh32x32);
 
-
-            GetLatestReleasedAllRules = Utilities.CreateButtonDef("Get Latest Released Version", "GetLatestReleasedVersionAllRules", "", image16x16, image32x32);
-
-            if (GetLatestReleasedAllRules != null)
-            {
-                allRulesRibbonPanel.CommandControls.AddButton(GetLatestReleasedAllRules);
-                GetLatestReleasedAllRules.OnExecute += GetLatestReleasedAllRules_OnExecute;
-            }
-
-            CheckIn = Utilities.CreateButtonDef("", "Checkin", "", checkIn16x16, checkIn32x32);
-
-            if (CheckIn != null)
-            {
-                statusRibbonPanel.CommandControls.AddButton(CheckIn, true);
-                CheckIn.OnExecute += CheckIn_OnExecute;
-            }
-
-            CheckOut = Utilities.CreateButtonDef("Check Out", "Checkout", "", image16x16, image32x32);
-
-            if (CheckOut != null)
-            {
-                statusRibbonPanel.CommandControls.AddButton(CheckOut, true);
-                CheckOut.OnExecute += CheckOut_OnExecute;
-            }
-
-
-            UndoCheckOut = Utilities.CreateButtonDef("Undo Check Out", "UndoCheckOut", "", image16x16, image16x16);
-
-            if (UndoCheckOut != null)
-            {
-                statusRibbonPanel.CommandControls.AddButton(UndoCheckOut, true);
-                UndoCheckOut.OnExecute += UndoCheckOut_OnExecute;
-            }
-
-
-            CurrentLifecycleState = Utilities.CreateComboBoxDef("Current Lifecycle State", "CurrentLifecycleState", CommandTypesEnum.kQueryOnlyCmdType, 200);
-
-            if (CurrentLifecycleState != null)
-            {
-                lifecycleRibbonPanel.CommandControls.AddComboBox(CurrentLifecycleState);
-                string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
-                if (ExternalRules.ListIndex != 1)
+                if (Utilities.ButtonDefExist("Refresh"))
                 {
-                    CurrentLifecycleState.AddItem(VaultLifecycleUtilities.GetLifecycleState(selectedItemName));
-                    CurrentLifecycleState.ListIndex = 1;
+                    manageRibbonPanel.CommandControls.AddButton(Refresh, true);
+                    Refresh.OnExecute += Refresh_OnExecute;
                 }
             }
 
-            MakeLocalCopy = Utilities.CreateButtonDef("Make Local Copy", "MakeLocalCopy", "", image16x16, image32x32);
-
-            if (MakeLocalCopy != null)
+            if (!Utilities.ButtonDefExist("GetLatestAllRules"))
             {
-                LocalRibbonPanel.CommandControls.AddButton(MakeLocalCopy, true);
-                MakeLocalCopy.OnExecute += MakeLocalCopy_OnExecute;
+                GetLatestAllRules = Utilities.CreateButtonDef("Get Latest", "GetLatestAllRules", "", get16x16, get32x32);
+
+                if (Utilities.ButtonDefExist("GetLatestAllRules"))
+                {
+                    allRulesRibbonPanel.CommandControls.AddButton(GetLatestAllRules);
+                    GetLatestAllRules.OnExecute += GetLatestAllRules_OnExecute;
+                }
+                    
             }
 
-
-            OverwriteRuleOnDiskWithCopy = Utilities.CreateButtonDef("Overwrite Rule\r\nWith Copy", "OverwriteRuleOnDiskWithCopy", "", image16x16, image32x32);
-
-            if (OverwriteRuleOnDiskWithCopy != null)
+            if (!Utilities.ButtonDefExist("GetLatestReleasedVersionAllRules"))
             {
-                LocalRibbonPanel.CommandControls.AddButton(OverwriteRuleOnDiskWithCopy, true);
-                OverwriteRuleOnDiskWithCopy.OnExecute += OverwriteRuleOnDiskWithCopy_OnExecute;
+                GetLatestReleasedAllRules = Utilities.CreateButtonDef("Get Latest Released Version", "GetLatestReleasedVersionAllRules", "", get16x16, get32x32);
+
+                if (Utilities.ButtonDefExist("GetLatestReleasedVersionAllRules"))
+                {
+                    allRulesRibbonPanel.CommandControls.AddButton(GetLatestReleasedAllRules);
+                    GetLatestReleasedAllRules.OnExecute += GetLatestReleasedAllRules_OnExecute;
+                }
+                 
+            }
+
+            if (!Utilities.ButtonDefExist("Get"))
+            {
+                Get = Utilities.CreateButtonDef("Get", "Get", "", get16x16, get32x32);
+
+                if (Utilities.ButtonDefExist("Get"))
+
+                {
+                    statusRibbonPanel.CommandControls.AddButton(Get, true);
+                    Get.OnExecute += Get_OnExecute;
+                }
+                   
+            }
+
+            if (!Utilities.ButtonDefExist("Checkin"))
+            {
+                CheckIn = Utilities.CreateButtonDef("Check In", "Checkin", "", checkIn16x16, checkIn32x32);
+                if (Utilities.ButtonDefExist("Checkin"))
+                {
+                    statusRibbonPanel.CommandControls.AddButton(CheckIn, true);
+                    CheckIn.OnExecute += CheckIn_OnExecute;
+                }
+                    
+            }
+
+            if(!Utilities.ButtonDefExist("Checkout"))
+            {
+                CheckOut = Utilities.CreateButtonDef("Check Out", "Checkout", "", checkOut16x16, checkOut32x32);
+
+                if (Utilities.ButtonDefExist("Checkout"))
+                {
+                    statusRibbonPanel.CommandControls.AddButton(CheckOut, true);
+                    CheckOut.OnExecute += CheckOut_OnExecute;
+                }
+                  
+            }
+
+            if (!Utilities.ButtonDefExist("UndoCheckOut"))
+            {
+                UndoCheckOut = Utilities.CreateButtonDef("Undo Check Out", "UndoCheckOut", "", undoCheckout16x16, undoCheckout32x32);
+
+                if (Utilities.ButtonDefExist("UndoCheckOut"))
+                {
+                    statusRibbonPanel.CommandControls.AddButton(UndoCheckOut, true);
+                    UndoCheckOut.OnExecute += UndoCheckOut_OnExecute;
+                }
+                   
+            }
+
+            if (!Utilities.ComboExist("CurrentLifecycleState"))
+            {
+                CurrentLifecycleState = Utilities.CreateComboBoxDef("Current Lifecycle State", "CurrentLifecycleState", CommandTypesEnum.kQueryOnlyCmdType, 200);
+
+                if (Utilities.ComboExist("CurrentLifecycleState"))
+                {
+                    CurrentLifecycleState.Enabled = false;
+                    lifecycleRibbonPanel.CommandControls.AddComboBox(CurrentLifecycleState);
+                    string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+                    if (ExternalRules.ListIndex != 1)
+                    {
+                        CurrentLifecycleState.AddItem(VaultLifecycleUtilities.GetLifecycleState(selectedItemName));
+                        CurrentLifecycleState.ListIndex = 1;
+                    }
+                }
+            }
+
+            if (!Utilities.ButtonDefExist("MakeLocalCopy"))
+            {
+                MakeLocalCopy = Utilities.CreateButtonDef("Make Local Copy", "MakeLocalCopy", "", copy16x16, copy32x32);
+
+                if (Utilities.ButtonDefExist("MakeLocalCopy"))
+                {
+                    LocalRibbonPanel.CommandControls.AddButton(MakeLocalCopy, true);
+                    MakeLocalCopy.OnExecute += MakeLocalCopy_OnExecute;
+                }
+                   
+            }
+      
+            if (!Utilities.ButtonDefExist("OverwriteRuleOnDiskWithCopy"))
+            {
+                OverwriteRuleOnDiskWithCopy = Utilities.CreateButtonDef("Overwrite Rule\r\nWith Copy", "OverwriteRuleOnDiskWithCopy", "", overwrite16x16, overwrite32x32);
+
+                if (Utilities.ButtonDefExist("OverwriteRuleOnDiskWithCopy"))
+                {
+                    LocalRibbonPanel.CommandControls.AddButton(OverwriteRuleOnDiskWithCopy, true);
+                    OverwriteRuleOnDiskWithCopy.OnExecute += OverwriteRuleOnDiskWithCopy_OnExecute;
+                }
+                    
             }
 
 
