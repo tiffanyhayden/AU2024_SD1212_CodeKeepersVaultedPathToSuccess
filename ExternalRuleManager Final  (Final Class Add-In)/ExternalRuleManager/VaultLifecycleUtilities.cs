@@ -11,7 +11,7 @@ namespace ExternalRuleManager
     internal class VaultLifecycleUtilities
     {
 
-        public static string GetLifecycleState(string strFileName)
+        public static string GetLifecycleState(string filename)
         {
             try
             {
@@ -22,26 +22,26 @@ namespace ExternalRuleManager
                 }
 
                 // Check if the fileName is valid
-                if (string.IsNullOrEmpty(strFileName))
+                if (string.IsNullOrEmpty(filename))
                 {
-                    throw new ArgumentException("File name must have a value to continue.", nameof(strFileName));
+                    throw new ArgumentException("File name must have a value to continue.", nameof(filename));
                 }
 
                 // Get the document service
                 ACW.DocumentService docService = VaultConn.ActiveConnection.WebServiceManager.DocumentService;
 
                 // Find the file by name
-                ACW.File file = VaultFileUtilities.File_FindByFileName(strFileName);
+                ACW.File file = VaultFileUtilities.File_FindByFileName(filename);
                 if (file == null)
                 {
-                    throw new FileNotFoundException($"File '{strFileName}' not found in Vault.");
+                    throw new FileNotFoundException($"File '{filename}' not found in Vault.");
                 }
 
                 // Get all versions of the file
                 ACW.File[] fileVersions = docService.GetFilesByMasterId(file.MasterId);
                 if (fileVersions == null || fileVersions.Length == 0)
                 {
-                    throw new InvalidOperationException($"No file versions found for '{strFileName}'.");
+                    throw new InvalidOperationException($"No file versions found for '{filename}'.");
                 }
 
                 // Reverse the array to get the latest version first
@@ -59,4 +59,15 @@ namespace ExternalRuleManager
         }
 
     }
+
+    //public static string MoveLifeCycleState(string fileName)
+    //{
+    //    ACW.DocumentServiceExtensions docServiceExt = VaultConn.ActiveConnection.WebServiceManager.DocumentServiceExtensions;
+
+    //    ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
+    //    ACW.File[] files = docServiceExt.UpdateFileLifeCycleStates()
+
+    //}
+
+
 }

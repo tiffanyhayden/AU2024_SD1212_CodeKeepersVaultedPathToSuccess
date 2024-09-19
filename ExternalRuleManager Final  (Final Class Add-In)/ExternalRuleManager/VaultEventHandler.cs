@@ -19,8 +19,10 @@ namespace ExternalRuleManager
         private void OnConnectionEstablished(object? sender, ConnectionEventArgs e)
         {
             VaultConn.InitializeConnection();
-
+            VaultUtilities.GetLatestFilesByLifecycleState(Globals.ExternalRuleName, "Released");
             Globals.InvAppRibbon = new CustomRibbon();
+
+            
         }
 
         

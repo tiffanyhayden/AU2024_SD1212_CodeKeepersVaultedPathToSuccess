@@ -81,7 +81,6 @@ namespace ExternalRuleManager
             }
             catch (Exception)
             {
-
                 return null;
             }
 
@@ -110,6 +109,33 @@ namespace ExternalRuleManager
             }
 
             return false;
+
+
+        }
+
+
+        public static ButtonDefinition GetButtonDef(string InternalName)
+        {
+
+            Inventor.ButtonDefinition? existingDef = null;
+
+            try
+            {
+                existingDef = Globals.InvApp.CommandManager.ControlDefinitions[InternalName] as ButtonDefinition;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            if (existingDef != null)
+
+            {
+                //Add message box for user maybe? 
+                return existingDef;
+            }
+
+            return null;
 
 
         }

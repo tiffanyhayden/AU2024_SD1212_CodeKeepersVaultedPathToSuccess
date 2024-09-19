@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In)\\ExternalRuleManager\\ExternalRuleManager.csproj",
+      "projectUniqueName": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.csproj",
       "projectName": "ExternalRuleManager",
-      "projectPath": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In)\\ExternalRuleManager\\ExternalRuleManager.csproj",
+      "projectPath": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.csproj",
       "packagesPath": "C:\\Users\\TiffanyHayden\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In)\\ExternalRuleManager\\obj\\",
+      "outputPath": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

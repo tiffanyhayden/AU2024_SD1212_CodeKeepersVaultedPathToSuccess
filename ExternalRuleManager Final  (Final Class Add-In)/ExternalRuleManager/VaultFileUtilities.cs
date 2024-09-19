@@ -68,25 +68,44 @@ namespace ExternalRuleManager
 
             if (VaultConn.ActiveConnection != null)
             {
-                oFileIteration = new FileIteration(VaultConn.ActiveConnection, file);
-                oSettings = new InteractiveAcquireFileSettings(VaultConn.ActiveConnection, parent, "Download files");
+                try
+                {
+                    oFileIteration = new FileIteration(VaultConn.ActiveConnection, file);
 
-                oSettings.OptionsResolution.OverwriteOption = VDF.Vault.Settings.AcquireFilesSettings.AcquireFileResolutionOptions.OverwriteOptions.ForceOverwriteAll;
-                oSettings.OptionsResolution.SyncWithRemoteSiteSetting = VDF.Vault.Settings.AcquireFilesSettings.SyncWithRemoteSite.Always;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeAttachments = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeChildren = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeHiddenEntities = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeLibraryContents = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeParents = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeRelatedDocumentation = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseChildren = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseParents = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.ReleaseBiased = false;
+                    if (oFileIteration.IsCheckedOut)
+                    {
+                        throw new ArgumentException("File is already checked out.");
+                    }
+                    else
+                    {
+                        oSettings = new InteractiveAcquireFileSettings(VaultConn.ActiveConnection, parent, "Download files");
 
-                oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Checkout;
+                        oSettings.OptionsResolution.OverwriteOption = VDF.Vault.Settings.AcquireFilesSettings.AcquireFileResolutionOptions.OverwriteOptions.ForceOverwriteAll;
+                        oSettings.OptionsResolution.SyncWithRemoteSiteSetting = VDF.Vault.Settings.AcquireFilesSettings.SyncWithRemoteSite.Always;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeAttachments = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeChildren = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeHiddenEntities = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeLibraryContents = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeParents = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeRelatedDocumentation = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseChildren = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseParents = false;
+                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.ReleaseBiased = false;
 
-                oSettings.AddFileToAcquire(oFileIteration, oSettings.DefaultAcquisitionOption);
-                VaultConn.ActiveConnection.FileManager.AcquireFiles(oSettings);
+                        oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Checkout;
+
+                        oSettings.AddFileToAcquire(oFileIteration, oSettings.DefaultAcquisitionOption);
+                        VaultConn.ActiveConnection.FileManager.AcquireFiles(oSettings);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                
+
+ 
             }
         }
 
@@ -388,11 +407,22 @@ namespace ExternalRuleManager
             if (VaultConn.ActiveConnection != null)
             {
                 ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
+
+                
                 VDF.Vault.Currency.Entities.FileIteration fileIteration = new VDF.Vault.Currency.Entities.FileIteration(VaultConn.ActiveConnection, file);
+
+                Debug.Print(file.Name);
+
+                if (!fileIteration.IsCheckedOut)
+                {
+                    throw new FileNotFoundException("File is not checked out...");
+                }
 
                 VDF.Currency.FilePathAbsolute? filePathAbs = GetFilePathByFile(fileName);
 
-                if (!System.IO.File.Exists(filePathAbs.FileName))
+                Debug.Print(filePathAbs.FullPath);
+
+                if (!System.IO.File.Exists(filePathAbs.FullPath))
                 {
                     Console.WriteLine("The checkin file doesn't exist exist on disk.");
                     return "";
@@ -430,10 +460,13 @@ namespace ExternalRuleManager
 
 
                 string updatedfolderPath = filePathAbs.FullPath.Replace("/", @"\");
+                Debug.Print(updatedfolderPath);
 
                 string folderPathWithWorking = updatedfolderPath.Replace("$\\", workingFolder);
+                Debug.Print(folderPathWithWorking);
 
                 string filePathWithWorking = folderPathWithWorking + @"\" + file.Name;
+                Debug.Print(filePathWithWorking);
 
                 filePathAbs = new VDF.Currency.FilePathAbsolute(filePathWithWorking);
 

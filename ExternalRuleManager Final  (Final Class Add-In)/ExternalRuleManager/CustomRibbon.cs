@@ -27,11 +27,11 @@ namespace ExternalRuleManager
         public ButtonDefinition UndoCheckOut { get; set; }
         public ButtonDefinition MakeLocalCopy { get; set; }
         public ButtonDefinition OverwriteRuleOnDiskWithCopy { get; set; }
-        public ButtonDefinition Refresh { get; set; }
+        public static ButtonDefinition Refresh { get; set; }
 
 
 
-        private bool isExternalRulesInitialized = false;
+        public bool isExternalRulesInitialized = false;
 
         private RibbonTab externalRuleManagerRibbonTab;
 
@@ -57,6 +57,12 @@ namespace ExternalRuleManager
             AddExternalRules();
             ExternalRules.OnSelect += ExternalRules_OnSelect;
 
+            Image refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
+            Image refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
+            Refresh = Utilities.CreateButtonDef("Refresh", "CustomRefresh", "", refresh16x16, refresh32x32);
+
+
+
             Ribbon partRibbon = Globals.InvApp.UserInterfaceManager.Ribbons["Part"];
             Ribbon assemblyRibbon = Globals.InvApp.UserInterfaceManager.Ribbons["Assembly"];
             Ribbon drawingRibbon = Globals.InvApp.UserInterfaceManager.Ribbons["Drawing"];
@@ -69,6 +75,7 @@ namespace ExternalRuleManager
 
 
             isExternalRulesInitialized = true;
+
         }
 
         #endregion
@@ -90,7 +97,7 @@ namespace ExternalRuleManager
         /// Adds the TestButton to a specific ribbon in the Inventor UI.
         /// </summary>
         /// <param name="targetRibbon">The ribbon to which the TestButton will be added.</param>
-        private void AddToRibbon(Ribbon targetRibbon)
+        public   void AddToRibbon(Ribbon targetRibbon)
         {
             externalRuleManagerRibbonTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManager" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
@@ -106,22 +113,28 @@ namespace ExternalRuleManager
 
             manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
 
-            if (targetRibbon.InternalName != "ZeroDoc")
-            {
-                if (targetRibbon.InternalName == "Part")
-                {
-                    // Additional logic for Part ribbon can be added here
-                }
-                else if (targetRibbon.InternalName == "Assembly")
-                {
-                    // Additional logic for Assembly ribbon can be added here
-                }
-                else if (targetRibbon.InternalName == "Drawing")
-                {
-                    // Additional logic for Drawing ribbon can be added here
-                }
-            }
+
+
+
+            //if (targetRibbon.InternalName != "ZeroDoc")
+            //{
+            //    if (targetRibbon.InternalName == "Part")
+            //    {
+            //        // Additional logic for Part ribbon can be added here
+            //    }
+            //    else if (targetRibbon.InternalName == "Assembly")
+            //    {
+            //        // Additional logic for Assembly ribbon can be added here
+            //    }
+            //    else if (targetRibbon.InternalName == "Drawing")
+            //    {
+            //        // Additional logic for Drawing ribbon can be added here
+            //    }
+            //}
         }
+
+
+
 
         #region Ui Events
 
@@ -129,7 +142,7 @@ namespace ExternalRuleManager
         {
             if (isExternalRulesInitialized)
             {
-                CreateAndLoadOtherButtons();
+                RefreshUI();
             }
 
         }
@@ -139,6 +152,7 @@ namespace ExternalRuleManager
             if(isExternalRulesInitialized)
             {
                 CreateAndLoadOtherButtons();
+                
                 RefreshUI();
                 
                 
@@ -150,11 +164,15 @@ namespace ExternalRuleManager
         {
             VaultUtilities.GetLatestOnFolder(Globals.ExternalRuleName);
 
+            RefreshUI();
+
         }
 
         private void GetLatestReleasedAllRules_OnExecute(NameValueMap context)
         {
-            VaultUtilities.GetLatestFilesByLifecycleState(Globals.ExternalRuleName, "");
+            VaultUtilities.GetLatestFilesByLifecycleState(Globals.ExternalRuleName, "Released");
+
+            RefreshUI();
         }
 
         private void UndoCheckOut_OnExecute(NameValueMap context)
@@ -165,11 +183,14 @@ namespace ExternalRuleManager
             {
                 VaultFileUtilities.File_UndoCheckOut(selectedItemName);
             }
-            
+
+            RefreshUI();
+
         }
 
         private void Get_OnExecute(NameValueMap context)
         {
+            
 
             string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
             if (ExternalRules.ListIndex != 1)
@@ -178,6 +199,8 @@ namespace ExternalRuleManager
 
                 VaultFileUtilities.File_GetLatest(selectedItemName);
             }
+
+            RefreshUI();
 
         }
 
@@ -192,6 +215,8 @@ namespace ExternalRuleManager
                 VaultFileUtilities.File_CheckOut(file);
             }
 
+            RefreshUI();
+
         }
 
         private void CheckIn_OnExecute(NameValueMap context)
@@ -204,6 +229,8 @@ namespace ExternalRuleManager
 
                 VaultFileUtilities.File_CheckIn(selectedItemName, "");
             }
+
+            RefreshUI();
 
         }
 
@@ -222,12 +249,16 @@ namespace ExternalRuleManager
         private void MakeLocalCopy_OnExecute(NameValueMap context)
         {
             FileUtilities.MakeLocalCopy();
+
+            RefreshUI();
         }
 
 
         private void OverwriteRuleOnDiskWithCopy_OnExecute(NameValueMap context)
         {
             FileUtilities.OverwriteRuleOnDiskWithCopy();
+
+            RefreshUI();
         }
 
 
@@ -270,6 +301,14 @@ namespace ExternalRuleManager
         {
 
             string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+            bool isCheckedOut = false;
+
+            Get.Enabled = true;
+            CheckOut.Enabled = !isCheckedOut;
+            UndoCheckOut.Enabled = isCheckedOut;
+            CheckIn.Enabled = isCheckedOut;
+            MakeLocalCopy.Enabled = true;
+            OverwriteRuleOnDiskWithCopy.Enabled = true;
 
             if (ExternalRules.ListIndex == 1)
             {
@@ -283,23 +322,25 @@ namespace ExternalRuleManager
             }
             else
             {
+                if (ExternalRules.ListIndex != 1)
+                {
+                    ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
 
+                    if (file != null)
+                    {
+                        isCheckedOut = VaultFileUtilities.File_IsCheckedOut(file.Name);
+
+                        Get.Enabled = true;
+                        CheckOut.Enabled = !isCheckedOut;
+                        UndoCheckOut.Enabled = isCheckedOut;
+                        CheckIn.Enabled = isCheckedOut;
+                        MakeLocalCopy.Enabled = true;
+                        OverwriteRuleOnDiskWithCopy.Enabled = true;
+                    }
+                }
             }
-
-
-            //if (ExternalRules.ListIndex != 1)
-            //{
-            //    ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
-
-            //    VaultFileUtilities.File_CheckOut(file);
-            //}
-
-
-
-
-
-
         }
+
 
 
         public void CreateAndLoadOtherButtons()
@@ -327,11 +368,11 @@ namespace ExternalRuleManager
 
 
 
-            if (!Utilities.ButtonDefExist("Refresh"))
+            if (!Utilities.ButtonDefExist("CustomRefresh"))
             {
-                Refresh = Utilities.CreateButtonDef("Refresh", "Refresh", "", refresh16x16, refresh32x32);
+                Refresh = Utilities.CreateButtonDef("Refresh", "CustomRefresh", "", refresh16x16, refresh32x32);
 
-                if (Utilities.ButtonDefExist("Refresh"))
+                if (Utilities.ButtonDefExist("CustomRefresh"))
                 {
                     manageRibbonPanel.CommandControls.AddButton(Refresh, true);
                     Refresh.OnExecute += Refresh_OnExecute;
@@ -362,11 +403,11 @@ namespace ExternalRuleManager
                  
             }
 
-            if (!Utilities.ButtonDefExist("Get"))
+            if (!Utilities.ButtonDefExist("VaultGet"))
             {
-                Get = Utilities.CreateButtonDef("Get", "Get", "", get16x16, get32x32);
+                Get = Utilities.CreateButtonDef("Get", "VaultGet", "", get16x16, get32x32);
 
-                if (Utilities.ButtonDefExist("Get"))
+                if (Utilities.ButtonDefExist("VaultGet"))
 
                 {
                     statusRibbonPanel.CommandControls.AddButton(Get, true);

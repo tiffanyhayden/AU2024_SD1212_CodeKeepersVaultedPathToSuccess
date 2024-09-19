@@ -19,12 +19,13 @@ namespace ExternalRuleManager
             ApplicationEvents.OnCloseDocument += OnCloseDocument;
             ApplicationEvents.OnActivateDocument += OnActivateDocument;
 
+               
         }
 
         private void OnOpenDocument(_Document DocumentObjects, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
+
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
-            //Add Code
         }
 
         private void OnInitializeDocument(_Document DocumentObjects, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
@@ -35,7 +36,6 @@ namespace ExternalRuleManager
         private void OnSaveDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
-            // Add your code here
         }
 
         private void OnCloseDocument(_Document DocumentObjects, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
@@ -46,10 +46,7 @@ namespace ExternalRuleManager
         private void OnActivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
-            //if (BeforeOrAfter == EventTimingEnum.kAfter)
-            //{
-            //    //Globals.g_Ribbon
-            //}
+
 
         }
 
