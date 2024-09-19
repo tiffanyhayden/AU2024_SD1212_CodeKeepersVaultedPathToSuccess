@@ -303,13 +303,6 @@ namespace ExternalRuleManager
             string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
             bool isCheckedOut = false;
 
-            Get.Enabled = true;
-            CheckOut.Enabled = !isCheckedOut;
-            UndoCheckOut.Enabled = isCheckedOut;
-            CheckIn.Enabled = isCheckedOut;
-            MakeLocalCopy.Enabled = true;
-            OverwriteRuleOnDiskWithCopy.Enabled = true;
-
             if (ExternalRules.ListIndex == 1)
             {
                 Get.Enabled = false;
@@ -318,6 +311,8 @@ namespace ExternalRuleManager
                 MakeLocalCopy.Enabled = false;
                 OverwriteRuleOnDiskWithCopy.Enabled = false;
                 UndoCheckOut.Enabled = false;
+                CurrentLifecycleState.Clear();
+                CurrentLifecycleState.ListIndex = 0;
 
             }
             else
@@ -336,6 +331,11 @@ namespace ExternalRuleManager
                         CheckIn.Enabled = isCheckedOut;
                         MakeLocalCopy.Enabled = true;
                         OverwriteRuleOnDiskWithCopy.Enabled = true;
+
+
+                        ResetCurrentLifecycleDropdown();
+
+
                     }
                 }
             }
@@ -462,8 +462,7 @@ namespace ExternalRuleManager
                     string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
                     if (ExternalRules.ListIndex != 1)
                     {
-                        CurrentLifecycleState.AddItem(VaultLifecycleUtilities.GetLifecycleState(selectedItemName));
-                        CurrentLifecycleState.ListIndex = 1;
+                        ResetCurrentLifecycleDropdown();
                     }
                 }
             }
@@ -491,13 +490,16 @@ namespace ExternalRuleManager
                 }
                     
             }
-
-
-
         }
 
 
-
+        public void ResetCurrentLifecycleDropdown()
+        {
+            string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+            CurrentLifecycleState.Clear();
+            CurrentLifecycleState.AddItem(VaultLifecycleUtilities.GetLifecycleState(selectedItemName));
+            CurrentLifecycleState.ListIndex = 1;
+        }
 
         #endregion
 
