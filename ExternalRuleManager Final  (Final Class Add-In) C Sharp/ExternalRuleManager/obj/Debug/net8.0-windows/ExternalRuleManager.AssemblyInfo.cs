@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExternalRuleManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("2024.9.19.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32b115f6f3150331ee7be51e66b5e9e5242b1845")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("2024.9.19.13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de0a19ca74a307bbda27b2439c30e4d2c2b5ea62")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExternalRuleManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExternalRuleManager")]
-[assembly: System.Reflection.AssemblyVersionAttribute("2024.9.19.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("2024.9.19.13")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 

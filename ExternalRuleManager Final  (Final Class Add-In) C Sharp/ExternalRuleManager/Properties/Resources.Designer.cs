@@ -203,6 +203,26 @@ namespace ExternalRuleManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] RunRule_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("RunRule_16x16", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] RunRule_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("RunRule_32x32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] UndoCheckout_16x16 {
             get {
                 object obj = ResourceManager.GetObject("UndoCheckout_16x16", resourceCulture);

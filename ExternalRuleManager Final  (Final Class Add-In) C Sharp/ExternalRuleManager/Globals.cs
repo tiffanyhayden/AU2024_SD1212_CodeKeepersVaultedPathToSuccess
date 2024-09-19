@@ -108,6 +108,8 @@ namespace ExternalRuleManager
         public const string InvAppGuidID = "{" + InvAppGuid + "}";
 
         public const string ExternalRuleName = "EXTERNAL RULES";
+
+        public const string ExternalRuleDir = "C:\\AU2024\\AU\\EXTERNAL RULES";
     }
 }
 

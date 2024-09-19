@@ -1,9 +1,17 @@
-﻿using ExternalRuleManager.Properties;
+﻿using Autodesk.Connectivity.WebServices;
+using ExternalRuleManager.Properties;
 using Inventor;
+using System.Data;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Forms;
 using ACW = Autodesk.Connectivity.WebServices;
 using File = System.IO.File;
 using VDF = Autodesk.DataManagement.Client.Framework;
+using Autodesk.iLogic.Interfaces;
+using Autodesk.iLogic.Runtime;
+using System.Drawing;
+using Autodesk.iLogic.Automation;
 
 namespace ExternalRuleManager
 {
@@ -16,7 +24,7 @@ namespace ExternalRuleManager
 
         public static ComboBoxDefinition ExternalRules { get; set; }
         public ComboBoxDefinition CurrentLifecycleState { get; set; }
-
+        public static ComboBoxDefinition LocalRules { get; set; }
 
 
         public ButtonDefinition GetLatestAllRules { get; set; }
@@ -28,7 +36,7 @@ namespace ExternalRuleManager
         public ButtonDefinition MakeLocalCopy { get; set; }
         public ButtonDefinition OverwriteRuleOnDiskWithCopy { get; set; }
         public static ButtonDefinition Refresh { get; set; }
-
+        public static ButtonDefinition RunRule { get; set; }
 
 
         public bool isExternalRulesInitialized = false;
@@ -40,8 +48,8 @@ namespace ExternalRuleManager
         private RibbonPanel allRulesRibbonPanel;
         private RibbonPanel lifecycleRibbonPanel;
         private RibbonPanel LocalRibbonPanel;
-
-
+        private RibbonPanel localRulesRibbon;
+        
 
         #endregion
 
@@ -57,8 +65,8 @@ namespace ExternalRuleManager
             AddExternalRules();
             ExternalRules.OnSelect += ExternalRules_OnSelect;
 
-            Image refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
-            Image refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
+            System.Drawing.Image refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
+            System.Drawing.Image refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
             Refresh = Utilities.CreateButtonDef("Refresh", "CustomRefresh", "", refresh16x16, refresh32x32);
 
 
@@ -85,11 +93,11 @@ namespace ExternalRuleManager
         /// </summary>
         /// <param name="byteArray">The byte array to convert.</param>
         /// <returns>The converted Image object.</returns>
-        private Image ByteArrayToImage(byte[] byteArray)
+        private System.Drawing.Image ByteArrayToImage(byte[] byteArray)
         {
             using (MemoryStream ms = new MemoryStream(byteArray))
             {
-                return Image.FromStream(ms);
+                return System.Drawing.Image.FromStream(ms);
             }
         }
 
@@ -113,7 +121,7 @@ namespace ExternalRuleManager
 
             manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
 
-
+            //localRulesRibbon = externalRuleManagerRibbonTab.RibbonPanels.Add("Local Rules", "id_LocalRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
 
             //if (targetRibbon.InternalName != "ZeroDoc")
@@ -257,9 +265,33 @@ namespace ExternalRuleManager
         private void OverwriteRuleOnDiskWithCopy_OnExecute(NameValueMap context)
         {
             FileUtilities.OverwriteRuleOnDiskWithCopy();
+            RefreshUI();
+        }
+
+        private void RunRule_OnExecute(NameValueMap context)
+        {
+
+            string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+
+            IStandardObjectProvider SOP = StandardObjectFactory.Create(Globals.InvApp.ActiveDocument);
+
+            SOP.iLogicVb.RunRule(Globals.InvApp.ActiveDocument, selectedItemName, context);
 
             RefreshUI();
         }
+
+
+        //private void LocalRules_OnSelect(NameValueMap context)
+        //{
+
+        //    string selectedItemName = ExternalRules.ListItem[ExternalRules.ListIndex];
+        //    if (ExternalRules.ListIndex != 1)
+        //    {
+
+        //        //VaultLifecycleUtilities.GetLifecycleState(selectedItemName);
+        //    }
+
+        //}
 
 
 
@@ -313,6 +345,8 @@ namespace ExternalRuleManager
                 UndoCheckOut.Enabled = false;
                 CurrentLifecycleState.Clear();
                 CurrentLifecycleState.ListIndex = 0;
+               // RunRule.Enabled = false;
+                //LocalRules.Enabled = false;
 
             }
             else
@@ -331,11 +365,12 @@ namespace ExternalRuleManager
                         CheckIn.Enabled = isCheckedOut;
                         MakeLocalCopy.Enabled = true;
                         OverwriteRuleOnDiskWithCopy.Enabled = true;
-
+                        //RunRule.Enabled = true;
+                        //LocalRules.Enabled = true;
 
                         ResetCurrentLifecycleDropdown();
 
-
+                       // ResetLocalRulesDropdown();
                     }
                 }
             }
@@ -347,22 +382,24 @@ namespace ExternalRuleManager
         {
 
             
-            Image image16x16 = ByteArrayToImage(Resources._16x16);
-            Image image32x32 = ByteArrayToImage(Resources._32x32);
-            Image checkIn16x16 = ByteArrayToImage(Resources.CheckIn_16x16);
-            Image checkIn32x32 = ByteArrayToImage(Resources.CheckIn_32x32);
-            Image checkOut16x16 = ByteArrayToImage(Resources.CheckOut_16x16);
-            Image checkOut32x32 = ByteArrayToImage(Resources.CheckOut_32x32);
-            Image undoCheckout16x16 = ByteArrayToImage(Resources.UndoCheckout_16x16);
-            Image undoCheckout32x32 = ByteArrayToImage(Resources.UndoCheckout_32x32);
-            Image copy16x16 = ByteArrayToImage(Resources.Copy_16x16);
-            Image copy32x32 = ByteArrayToImage(Resources.Copy_32x32);
-            Image get16x16 = ByteArrayToImage(Resources.Get_16x16);
-            Image get32x32 = ByteArrayToImage(Resources.Get_32x32);
-            Image overwrite16x16 = ByteArrayToImage(Resources.Overwrite_16x16);
-            Image overwrite32x32 = ByteArrayToImage(Resources.Overwrite_32x32);
-            Image refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
-            Image refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
+            System.Drawing.Image image16x16 = ByteArrayToImage(Resources._16x16);
+            System.Drawing.Image image32x32 = ByteArrayToImage(Resources._32x32);
+            System.Drawing.Image checkIn16x16 = ByteArrayToImage(Resources.CheckIn_16x16);
+            System.Drawing.Image checkIn32x32 = ByteArrayToImage(Resources.CheckIn_32x32);
+            System.Drawing.Image checkOut16x16 = ByteArrayToImage(Resources.CheckOut_16x16);
+            System.Drawing.Image checkOut32x32 = ByteArrayToImage(Resources.CheckOut_32x32);
+            System.Drawing.Image undoCheckout16x16 = ByteArrayToImage(Resources.UndoCheckout_16x16);
+            System.Drawing.Image undoCheckout32x32 = ByteArrayToImage(Resources.UndoCheckout_32x32);
+            System.Drawing.Image copy16x16 = ByteArrayToImage(Resources.Copy_16x16);
+            System.Drawing.Image copy32x32 = ByteArrayToImage(Resources.Copy_32x32);
+            System.Drawing.Image get16x16 = ByteArrayToImage(Resources.Get_16x16);
+            System.Drawing.Image get32x32 = ByteArrayToImage(Resources.Get_32x32);
+            System.Drawing.Image overwrite16x16 = ByteArrayToImage(Resources.Overwrite_16x16);
+            System.Drawing.Image overwrite32x32 = ByteArrayToImage(Resources.Overwrite_32x32);
+            System.Drawing.Image refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
+            System.Drawing.Image refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
+            System.Drawing.Image runRule16x16 = ByteArrayToImage(Resources.RunRule_16x16);
+            System.Drawing.Image runRule32x32 = ByteArrayToImage(Resources.RunRule_32x32);
 
 
 
@@ -490,6 +527,31 @@ namespace ExternalRuleManager
                 }
                     
             }
+
+            //if (!Utilities.ComboExist("LocalRules"))
+            //{
+            //    LocalRules = Utilities.CreateComboBoxDef("Local Rules", "LocalRules", CommandTypesEnum.kQueryOnlyCmdType, 200);
+
+            //    if (Utilities.ComboExist("LocalRules"))
+            //    {
+            //        localRulesRibbon.CommandControls.AddComboBox(LocalRules);
+            //    }
+            //}
+
+            //if (!Utilities.ButtonDefExist("RunRule"))
+            //{
+            //    RunRule = Utilities.CreateButtonDef("Run Rule", "RunRule", "", runRule16x16, runRule32x32);
+
+            //    if (Utilities.ButtonDefExist("RunRule"))
+            //    {
+            //        localRulesRibbon.CommandControls.AddButton(RunRule, true);
+            //        RunRule.OnExecute += RunRule_OnExecute;
+            //    }
+
+            //}
+
+
+            
         }
 
 
@@ -499,6 +561,31 @@ namespace ExternalRuleManager
             CurrentLifecycleState.Clear();
             CurrentLifecycleState.AddItem(VaultLifecycleUtilities.GetLifecycleState(selectedItemName));
             CurrentLifecycleState.ListIndex = 1;
+        }
+
+
+        public void ResetLocalRulesDropdown()
+        {
+            //string selectedItemName = LocalRules.ListItem[LocalRules.ListIndex];
+            LocalRules.Clear();
+            try
+            {
+                string[] files = Directory.GetFiles(Globals.ExternalRuleDir);
+
+                foreach (string file in files)
+                {
+                    LocalRules.AddItem(System.IO.Path.GetFileName(file));
+                }
+
+                LocalRules.ListIndex = 1;
+
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Directory not found...");
+                //throw new InvalidOperationException($"Error populating LocalRules dropdown.");
+            }
+
         }
 
         #endregion

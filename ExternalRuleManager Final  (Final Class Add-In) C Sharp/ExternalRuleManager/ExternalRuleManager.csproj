@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>2024.9.19.0</AssemblyVersion>
-    <FileVersion>2024.9.19.0</FileVersion>
+    <AssemblyVersion>2024.9.19.13</AssemblyVersion>
+    <FileVersion>2024.9.19.13</FileVersion>
     <OutputPath>C:\ProgramData\Autodesk\Inventor Addins\ExternalRuleManager\</OutputPath>
   </PropertyGroup>
 
@@ -31,6 +31,18 @@
     </Reference>
     <Reference Include="Autodesk.DataManagement.Client.Framework.Vault.Forms">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Vault Client 2025\Explorer\Autodesk.DataManagement.Client.Framework.Vault.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.iLogic.Automation">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Inventor 2025\Bin\Autodesk.iLogic.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.iLogic.Interfaces">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Inventor 2025\Bin\Autodesk.iLogic.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.iLogic.Runtime">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Inventor 2025\Bin\Autodesk.iLogic.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.iLogic.Types">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Inventor 2025\Bin\Autodesk.iLogic.Types.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Inventor 2025\Bin\Autodesk.Inventor.Interop.dll</HintPath>
