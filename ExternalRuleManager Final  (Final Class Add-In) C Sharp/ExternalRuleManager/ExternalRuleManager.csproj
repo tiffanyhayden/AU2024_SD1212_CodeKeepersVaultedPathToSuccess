@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>2024.9.19.13</AssemblyVersion>
-    <FileVersion>2024.9.19.13</FileVersion>
+    <AssemblyVersion>2024.9.20.2</AssemblyVersion>
+    <FileVersion>2024.9.20.2</FileVersion>
     <OutputPath>C:\ProgramData\Autodesk\Inventor Addins\ExternalRuleManager\</OutputPath>
   </PropertyGroup>
 
