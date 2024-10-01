@@ -41,7 +41,12 @@ namespace ExternalRuleManager
 
         public bool isExternalRulesInitialized = false;
 
-        private RibbonTab externalRuleManagerRibbonTab;
+        private RibbonTab externalRuleManagerRibbonZeroDocTab;
+        private RibbonTab externalRuleManagerRibbonPartTab;
+        private RibbonTab externalRuleManagerRibbonAssyTab;
+        private RibbonTab externalRuleManagerRibbonDwgTab;
+        
+
 
         private RibbonPanel manageRibbonPanel;
         private RibbonPanel statusRibbonPanel;
@@ -107,38 +112,73 @@ namespace ExternalRuleManager
         /// <param name="targetRibbon">The ribbon to which the TestButton will be added.</param>
         public   void AddToRibbon(Ribbon targetRibbon)
         {
-            externalRuleManagerRibbonTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManager" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            externalRuleManagerRibbonPartTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManagerPartTab" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            manageRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Manage", "id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            externalRuleManagerRibbonZeroDocTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManagerZeroDocTab" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            allRulesRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("All Rules", "id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            externalRuleManagerRibbonAssyTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManagerAssyTab" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            statusRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
-
-            lifecycleRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Lifecycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
-
-            LocalRibbonPanel = externalRuleManagerRibbonTab.RibbonPanels.Add("Local (C:)", "id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
-
-            manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
-
-            //localRulesRibbon = externalRuleManagerRibbonTab.RibbonPanels.Add("Local Rules", "id_LocalRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            externalRuleManagerRibbonDwgTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManagerDwgTab" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
 
-            //if (targetRibbon.InternalName != "ZeroDoc")
-            //{
-            //    if (targetRibbon.InternalName == "Part")
-            //    {
-            //        // Additional logic for Part ribbon can be added here
-            //    }
-            //    else if (targetRibbon.InternalName == "Assembly")
-            //    {
-            //        // Additional logic for Assembly ribbon can be added here
-            //    }
-            //    else if (targetRibbon.InternalName == "Drawing")
-            //    {
-            //        // Additional logic for Drawing ribbon can be added here
-            //    }
-            //}
+
+            if(targetRibbon.InternalName == "ZeroDoc")
+            {
+                manageRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Manage", "id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                allRulesRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("All Rules", "id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                statusRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                lifecycleRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Lifecycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                LocalRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Local (C:)", "id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
+            }
+            else if(targetRibbon.InternalName == "Part")
+            {
+                manageRibbonPanel = externalRuleManagerRibbonPartTab.RibbonPanels.Add("Manage", "id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                allRulesRibbonPanel = externalRuleManagerRibbonPartTab.RibbonPanels.Add("All Rules", "id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                statusRibbonPanel = externalRuleManagerRibbonPartTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                lifecycleRibbonPanel = externalRuleManagerRibbonPartTab.RibbonPanels.Add("Lifecycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                LocalRibbonPanel = externalRuleManagerRibbonPartTab.RibbonPanels.Add("Local (C:)", "id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
+            }
+            else if (targetRibbon.InternalName == "Assembly")
+            {
+                manageRibbonPanel = externalRuleManagerRibbonAssyTab.RibbonPanels.Add("Manage", "id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                allRulesRibbonPanel = externalRuleManagerRibbonAssyTab.RibbonPanels.Add("All Rules", "id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                statusRibbonPanel = externalRuleManagerRibbonAssyTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                lifecycleRibbonPanel = externalRuleManagerRibbonAssyTab.RibbonPanels.Add("Lifecycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                LocalRibbonPanel = externalRuleManagerRibbonAssyTab.RibbonPanels.Add("Local (C:)", "id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
+            }
+            else if (targetRibbon.InternalName == "Drawing")
+            {
+                manageRibbonPanel = externalRuleManagerRibbonDwgTab.RibbonPanels.Add("Manage", "id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                allRulesRibbonPanel = externalRuleManagerRibbonDwgTab.RibbonPanels.Add("All Rules", "id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                statusRibbonPanel = externalRuleManagerRibbonDwgTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                lifecycleRibbonPanel = externalRuleManagerRibbonDwgTab.RibbonPanels.Add("Lifecycle", "id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                LocalRibbonPanel = externalRuleManagerRibbonDwgTab.RibbonPanels.Add("Local (C:)", "id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
+
+                manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
+            }
+
         }
 
 
@@ -584,6 +624,20 @@ namespace ExternalRuleManager
             {
                 throw new ArgumentException("Directory not found...");
                 //throw new InvalidOperationException($"Error populating LocalRules dropdown.");
+            }
+
+        }
+
+        public void UIEnable(Inventor.Document document)
+        {
+            Inventor.Ribbon invRibbon = Globals.InvApp.UserInterfaceManager.ActiveEnvironment.Ribbon;
+
+            if(document.DocumentType == DocumentTypeEnum.kPartDocumentObject)
+            {
+
+                Get.Enabled = true;
+                CheckIn.Enabled = true;
+                CheckOut.Enabled = true;
             }
 
         }

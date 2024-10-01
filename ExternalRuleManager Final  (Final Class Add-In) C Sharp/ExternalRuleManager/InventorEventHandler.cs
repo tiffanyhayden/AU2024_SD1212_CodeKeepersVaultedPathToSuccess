@@ -1,4 +1,5 @@
-﻿using Inventor;
+﻿using Autodesk.Connectivity.WebServices;
+using Inventor;
 using static ExternalRuleManager.Globals;
 
 
@@ -45,6 +46,11 @@ namespace ExternalRuleManager
 
         private void OnActivateDocument(_Document DocumentObject, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
+            if(BeforeOrAfter == EventTimingEnum.kAfter)
+            {
+                Globals.InvAppRibbon.UIEnable(DocumentObject);
+            }
+
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
 
 
