@@ -23,13 +23,13 @@ namespace ExternalRuleManager
                
         }
 
-        private void OnOpenDocument(_Document DocumentObjects, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        private void OnOpenDocument(_Document DocumentObject, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
 
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
         }
 
-        private void OnInitializeDocument(_Document DocumentObjects, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        private void OnInitializeDocument(_Document DocumentObject, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
         }
@@ -39,8 +39,15 @@ namespace ExternalRuleManager
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
         }
 
-        private void OnCloseDocument(_Document DocumentObjects, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
+        private void OnCloseDocument(_Document DocumentObject, string FullDocumentName, EventTimingEnum BeforeOrAfter, NameValueMap Context, out HandlingCodeEnum HandlingCode)
         {
+
+            if (BeforeOrAfter == EventTimingEnum.kAfter)
+            {
+                Globals.InvAppRibbon.UIEnable(DocumentObject);
+                Globals.InvAppRibbon.RefreshUI();
+            }
+
             HandlingCode = HandlingCodeEnum.kEventNotHandled;
         }
 
@@ -49,6 +56,7 @@ namespace ExternalRuleManager
             if(BeforeOrAfter == EventTimingEnum.kAfter)
             {
                 Globals.InvAppRibbon.UIEnable(DocumentObject);
+                Globals.InvAppRibbon.RefreshUI();
             }
 
             HandlingCode = HandlingCodeEnum.kEventNotHandled;

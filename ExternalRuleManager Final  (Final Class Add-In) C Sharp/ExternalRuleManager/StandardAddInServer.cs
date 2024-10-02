@@ -38,7 +38,7 @@ namespace ExternalRuleManager
             Globals.InvApp = addInSiteObject.Application;
             Globals.InvAppEvents = new InventorEventHandler();
             Globals.VaultAppEvents = new VaultEventHandler();
-            //Globals.InvAppRibbon = new CustomRibbon();
+            Globals.InvAppRibbon = new CustomRibbon();
 
 
 

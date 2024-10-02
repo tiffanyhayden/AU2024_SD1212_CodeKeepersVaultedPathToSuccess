@@ -16,7 +16,7 @@ namespace ExternalRuleManager
 
         public static void MakeLocalCopy()
         {
-            try
+            try 
             {
                 // Get the current username
                 string username = System.Environment.UserName;

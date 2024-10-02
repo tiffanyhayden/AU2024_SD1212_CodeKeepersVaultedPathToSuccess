@@ -14,18 +14,26 @@ namespace ExternalRuleManager
         public VaultEventHandler()
         {
             VDF.Vault.Library.ConnectionManager.ConnectionEstablished += OnConnectionEstablished;
+            VDF.Vault.Library.ConnectionManager.ConnectionReleased += OnConnectionReleased;
         }
 
         private void OnConnectionEstablished(object? sender, ConnectionEventArgs e)
         {
             VaultConn.InitializeConnection();
             VaultUtilities.GetLatestFilesByLifecycleState(Globals.ExternalRuleName, "Released");
-            Globals.InvAppRibbon = new CustomRibbon();
+            Globals.InvAppRibbon.UIEnable(Globals.InvApp.ActiveDocument);
+            Globals.InvAppRibbon.LoadRules();
 
-            
+
+
         }
 
-        
+        private void OnConnectionReleased(object? sender, ConnectionEventArgs e)
+        {
+            Globals.InvAppRibbon.UIDisable(Globals.InvApp.ActiveDocument);
+        }
+
+
 
     }
 }
