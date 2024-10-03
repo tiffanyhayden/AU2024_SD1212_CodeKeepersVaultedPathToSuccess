@@ -5,68 +5,70 @@ using static ExternalRuleManager.Globals;
 namespace ExternalRuleManager
 {
     /// <summary>
-    /// This is the primary AddIn Server class that implements the ApplicationAddInServer interface
-    /// that all Inventor AddIns are required to implement. The communication between Inventor and
-    /// the AddIn is via the methods on this interface.
+    /// The primary AddIn server class that implements the <see cref="ApplicationAddInServer"/> interface.
+    /// This interface is required by all Inventor AddIns to facilitate communication between Inventor and the AddIn.
     /// </summary>
     [ProgId("TestAddin2.StandardAddInServer")]
     [Guid(InvAppGuid)]
-    public class StandardAddInServer : Inventor.ApplicationAddInServer
+    public class StandardAddInServer : ApplicationAddInServer
     {
-
         // Inventor application object.
         private Inventor.Application m_inventorApplication;
 
-        //user interface event
+        // User interface events object.
         private UserInterfaceEvents m_uiEvents;
 
-
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StandardAddInServer"/> class.
+        /// </summary>
         public StandardAddInServer()
         {
         }
 
         #region ApplicationAddInServer Members
 
+        /// <summary>
+        /// Activates the AddIn and initializes the Inventor environment.
+        /// This method is called by Inventor when the AddIn is loaded.
+        /// </summary>
+        /// <param name="addInSiteObject">The <see cref="ApplicationAddInSite"/> object that provides access to the Inventor application.</param>
+        /// <param name="firstTime">Indicates whether the AddIn is being loaded for the first time.</param>
         public void Activate(Inventor.ApplicationAddInSite addInSiteObject, bool firstTime)
         {
-            // This method is called by Inventor when it loads the addin.
-            // The AddInSiteObject provides access to the Inventor Application object.
-            // The FirstTime flag indicates if the addin is loaded for the first time.
-
             // Initialize AddIn members.
             Globals.InvApp = addInSiteObject.Application;
             Globals.InvAppEvents = new InventorEventHandler();
             Globals.VaultAppEvents = new VaultEventHandler();
             Globals.InvAppRibbon = new CustomRibbon();
 
-
-
+            // Set up user interface events
             m_uiEvents = Globals.InvApp.UserInterfaceManager.UserInterfaceEvents;
-
         }
+
+        /// <summary>
+        /// Deactivates the AddIn and cleans up resources.
+        /// This method is called by Inventor when the AddIn is unloaded.
+        /// </summary>
         public void Deactivate()
         {
+            // Clean up UI events and other resources
             m_uiEvents = null;
             Globals.InvApp = null;
 
+            // Force garbage collection to clean up any remaining objects.
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
 
-        public void ExecuteCommand(int commandID)
-        {
-            // Note:this method is now obsolete, you should use the 
-            // ControlDefinition functionality for implementing commands.
-        }
 
+        /// <summary>
+        /// Exposes an API for the AddIn that can be accessed by external programs.
+        /// </summary>
+        /// <remarks>
+        /// Typically, this would return an object that implements the AddIn's API, allowing external programs to interact with the AddIn.
+        /// </remarks>
         public object Automation
         {
-            // This property is provided to allow the AddIn to expose an API 
-            // of its own to other programs. Typically, this  would be done by
-            // implementing the AddIn's API interface in a class and returning 
-            // that class object through this property.
-
             get
             {
                 // TODO: Add ApplicationAddInServer.Automation getter implementation
@@ -74,7 +76,11 @@ namespace ExternalRuleManager
             }
         }
 
-        #endregion
+        void ApplicationAddInServer.ExecuteCommand(int CommandID)
+        {
+            throw new NotImplementedException();
+        }
 
+        #endregion
     }
 }

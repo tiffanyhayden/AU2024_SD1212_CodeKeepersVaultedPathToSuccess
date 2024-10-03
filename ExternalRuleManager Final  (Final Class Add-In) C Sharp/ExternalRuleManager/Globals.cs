@@ -1,5 +1,4 @@
-﻿
-namespace ExternalRuleManager
+﻿namespace ExternalRuleManager
 {
     /// <summary>
     /// A static class that contains global variables and constants for the Inventor add-in.
@@ -16,6 +15,9 @@ namespace ExternalRuleManager
         /// </summary>
         private static InventorEventHandler? _invAppEvents;
 
+        /// <summary>
+        /// A private field that stores the event handler for the Vault application events.
+        /// </summary>
         private static VaultEventHandler? _vaultAppEvents;
 
         /// <summary>
@@ -24,8 +26,12 @@ namespace ExternalRuleManager
         private static CustomRibbon? _invAppRibbon;
 
         /// <summary>
-        /// Gets or sets the instance of the Inventor application. This should be initialized before use.
+        /// Gets or sets the instance of the Inventor application. 
+        /// This should be initialized before use.
         /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when trying to access the property if it has not been initialized.
+        /// </exception>
         public static Inventor.Application InvApp
         {
             get
@@ -46,6 +52,9 @@ namespace ExternalRuleManager
         /// <summary>
         /// Gets or sets the event handler for the Inventor application events.
         /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when trying to access the property if it has not been initialized.
+        /// </exception>
         public static InventorEventHandler InvAppEvents
         {
             get
@@ -62,13 +71,19 @@ namespace ExternalRuleManager
             }
         }
 
+        /// <summary>
+        /// Gets or sets the event handler for the Vault application events.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when trying to access the property if it has not been initialized.
+        /// </exception>
         public static VaultEventHandler VaultAppEvents
         {
             get
             {
                 if (_vaultAppEvents == null)
                 {
-                    throw new InvalidOperationException("InvAppEvents has not been initialized.");
+                    throw new InvalidOperationException("VaultAppEvents has not been initialized.");
                 }
                 return _vaultAppEvents;
             }
@@ -81,6 +96,9 @@ namespace ExternalRuleManager
         /// <summary>
         /// Gets or sets the custom ribbon for the Inventor application.
         /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when trying to access the property if it has not been initialized.
+        /// </exception>
         public static CustomRibbon InvAppRibbon
         {
             get
@@ -107,9 +125,14 @@ namespace ExternalRuleManager
         /// </summary>
         public const string InvAppGuidID = "{" + InvAppGuid + "}";
 
+        /// <summary>
+        /// A constant string that stores the name of the external rules directory.
+        /// </summary>
         public const string ExternalRuleName = "EXTERNAL RULES";
 
+        /// <summary>
+        /// A constant string that stores the path of the external rules directory.
+        /// </summary>
         public const string ExternalRuleDir = "C:\\AU2024\\AU\\EXTERNAL RULES";
     }
 }
-

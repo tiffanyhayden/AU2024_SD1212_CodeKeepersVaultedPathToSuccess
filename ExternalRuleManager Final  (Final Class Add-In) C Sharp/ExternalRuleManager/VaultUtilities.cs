@@ -1,28 +1,22 @@
-﻿using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
-using Autodesk.DataManagement.Client.Framework.Vault.Forms.Settings;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ACW = Autodesk.Connectivity.WebServices;
-using VDF = Autodesk.DataManagement.Client.Framework;
+﻿using ACW = Autodesk.Connectivity.WebServices;
+
 
 namespace ExternalRuleManager
 {
     internal class VaultUtilities
     {
-
-
-
-
+        /// <summary>
+        /// Retrieves the latest files from a specified folder in the Vault.
+        /// </summary>
+        /// <param name="folderName">The name of the folder to retrieve files from.</param>
+        /// <returns>
+        /// An array of <see cref="ACW.File"/> representing the files in the folder, 
+        /// or <c>null</c> if the folder is not found or if the Vault connection is not established.
+        /// </returns>
         public static ACW.File[]? GetFilesByFolder(string folderName)
         {
-
             if (VaultConn.IsConnected())
             {
-
                 ACW.Folder[]? folders = VaultFolderUtilities.GetFoldersByFolderName(folderName);
                 ACW.Folder? folder = folders[0];
                 Autodesk.Connectivity.WebServicesTools.WebServiceManager? webServiceManager = VaultConn.ActiveConnection?.WebServiceManager;
@@ -32,12 +26,16 @@ namespace ExternalRuleManager
                 return files;
             }
 
-
             return null;
-
         }
 
-
+        /// <summary>
+        /// Retrieves the latest folder with a specified name from the Vault.
+        /// </summary>
+        /// <param name="folderName">The name of the folder to retrieve.</param>
+        /// <returns>
+        /// The latest <see cref="ACW.Folder"/> object found in the Vault or <c>null</c> if no folder is found.
+        /// </returns>
         public static ACW.Folder? GetLatestOnFolder(string folderName)
         {
             ACW.Folder? folder = null;
@@ -46,30 +44,34 @@ namespace ExternalRuleManager
             try
             {
                 folders = VaultFolderUtilities.GetFoldersByFolderName("EXTERNAL RULES");
-                
-                if(folders != null && folders.Length > 0)
+
+                if (folders != null && folders.Length > 0)
                 {
                     folder = folders[0];
                 }
-                
-                if(folder != null)
+
+                if (folder != null)
                 {
                     VaultFolderUtilities.Folder_Acquire(folder);
                     return folder;
                 }
 
                 return null;
-                
             }
             catch (Exception)
             {
-
                 return null;
             }
-
-
         }
 
+        /// <summary>
+        /// Retrieves the latest version of files within a specified folder based on the lifecycle state.
+        /// </summary>
+        /// <param name="folderName">The name of the folder to retrieve files from.</param>
+        /// <param name="lifecycleState">The lifecycle state to filter the files by.</param>
+        /// <remarks>
+        /// This method logs errors to the console for files that cannot be processed or for validation issues.
+        /// </remarks>
         public static void GetLatestFilesByLifecycleState(string folderName, string lifecycleState)
         {
             try
@@ -120,8 +122,5 @@ namespace ExternalRuleManager
                 Console.WriteLine($"Unexpected error: {ex.Message}");
             }
         }
-
-
-        
     }
 }

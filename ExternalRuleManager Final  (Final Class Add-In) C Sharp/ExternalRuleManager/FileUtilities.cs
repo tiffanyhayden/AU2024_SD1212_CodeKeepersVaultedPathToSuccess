@@ -1,22 +1,23 @@
-﻿using Inventor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VDF = Autodesk.DataManagement.Client.Framework;
+﻿using VDF = Autodesk.DataManagement.Client.Framework;
 using ACW = Autodesk.Connectivity.WebServices;
 using File = System.IO.File;
 using System.Diagnostics;
+
 
 namespace ExternalRuleManager
 {
     internal class FileUtilities
     {
-
+        /// <summary>
+        /// Makes a local copy of a selected external rule file from the Vault.
+        /// </summary>
+        /// <remarks>
+        /// The copied file will be renamed to include the current user's username. 
+        /// If the file already exists at the destination, a message is shown and no copy is made.
+        /// </remarks>
         public static void MakeLocalCopy()
         {
-            try 
+            try
             {
                 // Get the current username
                 string username = System.Environment.UserName;
@@ -38,6 +39,7 @@ namespace ExternalRuleManager
                     return;
                 }
 
+                //Get the file
                 ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
 
                 if (File.Exists(filePathAbs.FullPath))
@@ -60,8 +62,6 @@ namespace ExternalRuleManager
                     {
                         if (!File.Exists(destPath))
                         {
-                            
-
                             File.Copy(sourceFile, destPath);
                             FileInfo fileInfo = new FileInfo(destPath);
                             if (fileInfo.IsReadOnly)
@@ -92,6 +92,12 @@ namespace ExternalRuleManager
             }
         }
 
+        /// <summary>
+        /// Overwrites an external rule on disk with a local copy.
+        /// </summary>
+        /// <remarks>
+        /// If the file is not checked out, the user is prompted for confirmation before overwriting.
+        /// </remarks>
         public static void OverwriteRuleOnDiskWithCopy()
         {
             try
@@ -106,6 +112,7 @@ namespace ExternalRuleManager
                     return;
                 }
 
+                //Get the name of the selected item from the combobox
                 string selectedItemName = CustomRibbon.ExternalRules.ListItem[CustomRibbon.ExternalRules.ListIndex];
 
                 // Get the file path and check if the file exists
@@ -116,6 +123,7 @@ namespace ExternalRuleManager
                     return;
                 }
 
+                //Get the file
                 ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
 
                 if (File.Exists(filePathAbs.FullPath))
@@ -139,19 +147,17 @@ namespace ExternalRuleManager
                     {
                         if (File.Exists(destPath))
                         {
-                            if(VaultFileUtilities.File_IsCheckedOut(file.Name))
+                            if (VaultFileUtilities.File_IsCheckedOut(file.Name))
                             {
                                 ReplaceFile(destPath, sourceFile);
-
                             }
                             else
                             {
                                 DialogResult result = MessageBox.Show($"Vaulted version is not checked out, do you still wish to overwrite?", "External Rule Manager", MessageBoxButtons.YesNo);
 
-                                if(result == DialogResult.Yes)
+                                if (result == DialogResult.Yes)
                                 {
                                     ReplaceFile(destPath, sourceFile);
-
                                 }
                             }
                         }
@@ -176,6 +182,14 @@ namespace ExternalRuleManager
             }
         }
 
+        /// <summary>
+        /// Replaces the target file with the source file, ensuring the target file is writable.
+        /// </summary>
+        /// <param name="sourceFile">The path of the source file to replace with.</param>
+        /// <param name="targetFile">The path of the target file to be replaced.</param>
+        /// <remarks>
+        /// Uses an atomic operation to ensure that the target file is safely replaced. If the target file is read-only, the attribute is removed before replacement.
+        /// </remarks>
         private static void ReplaceFile(string sourceFile, string targetFile)
         {
             try
@@ -188,9 +202,8 @@ namespace ExternalRuleManager
                     targetFileInfo.IsReadOnly = false;
                 }
 
-                // Use File.Replace for an atomic operation
-                File.Replace(sourceFile, targetFile, null); // The third parameter is for a backup file if needed
-                Console.WriteLine($"Replaced '{targetFile}' with '{sourceFile}' successfully.");
+                // Use File.Replace
+                File.Replace(sourceFile, targetFile, null); 
             }
             catch (FileNotFoundException ex)
             {
@@ -201,6 +214,5 @@ namespace ExternalRuleManager
                 MessageBox.Show($"I/O error during file replace: {ex.Message}", "External Rule Manager");
             }
         }
-
     }
 }

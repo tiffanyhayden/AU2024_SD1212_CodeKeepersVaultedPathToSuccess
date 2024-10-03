@@ -13,21 +13,24 @@ using System.Text;
 using System.Threading.Tasks;
 using ACW = Autodesk.Connectivity.WebServices;
 using VDF = Autodesk.DataManagement.Client.Framework;
-using System;
-using System.IO;
-using System.Xml.Linq;
 
 namespace ExternalRuleManager
 {
+    /// <summary>
+    /// Provides utility methods for interacting with files in Autodesk Vault.
+    /// </summary>
     internal class VaultFileUtilities
     {
-
+        /// <summary>
+        /// Acquires a file from Vault, optionally checking it out.
+        /// </summary>
+        /// <param name="file">The Vault file to acquire.</param>
+        /// <param name="doCheckOut">If true, the file will be checked out; otherwise, it will just be downloaded.</param>
         public static void File_Acquire(ACW.File file, bool doCheckOut = false)
         {
             IntPtr oParent = IntPtr.Zero;
             InteractiveAcquireFileSettings oSettings;
             FileIteration oFileIteration;
-
 
             if (VaultConn.ActiveConnection != null)
             {
@@ -36,35 +39,34 @@ namespace ExternalRuleManager
 
                 oSettings.OptionsResolution.OverwriteOption = VDF.Vault.Settings.AcquireFilesSettings.AcquireFileResolutionOptions.OverwriteOptions.ForceOverwriteAll;
                 oSettings.OptionsResolution.SyncWithRemoteSiteSetting = VDF.Vault.Settings.AcquireFilesSettings.SyncWithRemoteSite.Always;
+
+                // Set relationship gathering settings
                 oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeAttachments = false;
                 oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeChildren = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeHiddenEntities = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeLibraryContents = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeParents = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeRelatedDocumentation = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseChildren = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseParents = false;
-                oSettings.OptionsRelationshipGathering.FileRelationshipSettings.ReleaseBiased = false;
 
                 if (doCheckOut)
                 {
                     oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Checkout;
                 }
-
-                oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Download;
+                else
+                {
+                    oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Download;
+                }
 
                 oSettings.AddFileToAcquire(oFileIteration, oSettings.DefaultAcquisitionOption);
                 VaultConn.ActiveConnection.FileManager.AcquireFiles(oSettings);
             }
         }
 
-
+        /// <summary>
+        /// Checks out a file from Vault.
+        /// </summary>
+        /// <param name="file">The Vault file to check out.</param>
         public static void File_CheckOut(ACW.File file)
         {
             IntPtr parent = IntPtr.Zero;
             InteractiveAcquireFileSettings oSettings;
             FileIteration oFileIteration;
-
 
             if (VaultConn.ActiveConnection != null)
             {
@@ -76,112 +78,88 @@ namespace ExternalRuleManager
                     {
                         throw new ArgumentException("File is already checked out.");
                     }
-                    else
-                    {
-                        oSettings = new InteractiveAcquireFileSettings(VaultConn.ActiveConnection, parent, "Download files");
 
-                        oSettings.OptionsResolution.OverwriteOption = VDF.Vault.Settings.AcquireFilesSettings.AcquireFileResolutionOptions.OverwriteOptions.ForceOverwriteAll;
-                        oSettings.OptionsResolution.SyncWithRemoteSiteSetting = VDF.Vault.Settings.AcquireFilesSettings.SyncWithRemoteSite.Always;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeAttachments = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeChildren = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeHiddenEntities = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeLibraryContents = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeParents = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeRelatedDocumentation = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseChildren = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.RecurseParents = false;
-                        oSettings.OptionsRelationshipGathering.FileRelationshipSettings.ReleaseBiased = false;
+                    oSettings = new InteractiveAcquireFileSettings(VaultConn.ActiveConnection, parent, "Download files");
+                    oSettings.OptionsResolution.OverwriteOption = VDF.Vault.Settings.AcquireFilesSettings.AcquireFileResolutionOptions.OverwriteOptions.ForceOverwriteAll;
+                    oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Checkout;
 
-                        oSettings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Checkout;
-
-                        oSettings.AddFileToAcquire(oFileIteration, oSettings.DefaultAcquisitionOption);
-                        VaultConn.ActiveConnection.FileManager.AcquireFiles(oSettings);
-                    }
+                    oSettings.AddFileToAcquire(oFileIteration, oSettings.DefaultAcquisitionOption);
+                    VaultConn.ActiveConnection.FileManager.AcquireFiles(oSettings);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    throw new Exception("Error checking out the file.", ex);
                 }
-                
-
- 
             }
         }
 
+        /// <summary>
+        /// Retrieves the latest version of a file in Vault that is at a specified lifecycle state.
+        /// </summary>
+        /// <param name="fileName">The name of the file to retrieve.</param>
+        /// <param name="lifecycleStateName">The lifecycle state of the file (e.g., "Released").</param>
+        /// <returns>The full path to the latest file version.</returns>
         public static string File_GetLatestLifecycleStateVersion(string fileName, string lifecycleStateName)
         {
-            // THIS FUNCTION "GETS" THE LATEST VERSION OF A FILE THAT IS AT A SPECIFIED LIFECYCLE STATE
             try
             {
                 lifecycleStateName = lifecycleStateName.ToUpper();
 
-                // CHECK INPUTS
                 if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(lifecycleStateName))
                 {
                     throw new ArgumentException("File name or lifecycle state cannot be null or empty.");
                 }
 
-                // Check Vault connection
                 if (VaultConn.ActiveConnection == null)
                 {
                     throw new InvalidOperationException("Vault connection is not active.");
                 }
 
-                // Get Vault services
                 ACW.DocumentService docService = VaultConn.ActiveConnection.WebServiceManager.DocumentService;
                 VDF.Vault.Services.Connection.IWorkingFoldersManager services = VaultConn.ActiveConnection.WorkingFoldersManager;
 
-                // Find file by name
                 ACW.File file = File_FindByFileName(fileName);
                 if (file == null)
                 {
                     throw new InvalidOperationException($"File '{fileName}' not found.");
                 }
 
-                // Get file versions
                 ACW.File[] fileVersions = docService.GetFilesByMasterId(file.MasterId);
                 if (fileVersions == null || fileVersions.Length == 0)
                 {
                     throw new InvalidOperationException($"No versions found for file '{fileName}'.");
                 }
 
-                // Reverse the array to process latest version first
                 Array.Reverse(fileVersions);
 
-                // FIND THE LATEST VERSION OF A FILE AT THE SPECIFIED LIFECYCLE STATE
-                ACW.File fileByLifecycleState = null;
-                foreach (ACW.File fileVersion in fileVersions)
-                {
-                    if (fileVersion.FileLfCyc.LfCycStateName.ToUpper() == lifecycleStateName)
-                    {
-                        fileByLifecycleState = fileVersion;
-                        break;
-                    }
-                }
+                ACW.File fileByLifecycleState = fileVersions.FirstOrDefault(fileVersion => fileVersion.FileLfCyc.LfCycStateName.ToUpper() == lifecycleStateName);
 
                 if (fileByLifecycleState == null)
                 {
                     throw new InvalidOperationException($"No file found with lifecycle state '{lifecycleStateName}'.");
                 }
 
-                // Get file iteration and full file path
                 FileIteration fileIteration = new FileIteration(VaultConn.ActiveConnection, fileByLifecycleState);
                 string fullFileName = services.GetPathOfFileInWorkingFolder(fileIteration).FullPath;
 
-                // Acquire the file from Vault
                 File_Acquire(fileByLifecycleState, false);
 
                 return fullFileName;
             }
             catch (ArgumentException ex)
             {
-                // Handle invalid arguments
                 Console.WriteLine($"File_GetLatestLifecycleStateVersion Failed: {ex.Message}");
                 return "";
             }
         }
 
+        /// <summary>
+        /// Finds a file in Vault by its name.
+        /// </summary>
+        /// <param name="fileName">The name of the file to search for.</param>
+        /// <param name="srchOperator">The search operator to use (default is 3).</param>
+        /// <param name="searchInStartingFolder">The folder in which to start the search (default is the root "$/").</param>
+        /// <returns>The first file that matches the search criteria.</returns>
         public static ACW.File File_FindByFileName(string fileName, int srchOperator = 3, string searchInStartingFolder = "$/")
         {
             try
@@ -194,20 +172,12 @@ namespace ExternalRuleManager
                 ACW.DocumentService docService = VaultConn.ActiveConnection.WebServiceManager.DocumentService;
                 ACW.PropDef[] propDefs = VaultConn.ActiveConnection.WebServiceManager.PropertyService.GetPropertyDefinitionsByEntityClassId("FILE");
 
-                // Ensure property definitions were found
-                if (propDefs == null || !propDefs.Any())
-                {
-                    throw new InvalidOperationException("No property definitions found for 'FILE'.");
-                }
-
-                // Find the specific property definition for "ClientFileName"
                 ACW.PropDef propDef = propDefs.SingleOrDefault(n => n.SysName == "ClientFileName");
                 if (propDef == null)
                 {
                     throw new InvalidOperationException("Property definition for 'ClientFileName' not found.");
                 }
 
-                // Prepare the search condition
                 ACW.SrchCond search = new ACW.SrchCond
                 {
                     PropDefId = propDef.Id,
@@ -217,138 +187,126 @@ namespace ExternalRuleManager
                     SrchTxt = fileName
                 };
 
-                // Find folders by path
                 ACW.Folder[] folders = docService.FindFoldersByPaths(new string[] { searchInStartingFolder });
                 if (folders == null || folders.Length == 0)
                 {
                     throw new InvalidOperationException($"No folders found at the specified path: {searchInStartingFolder}");
                 }
 
-                // Collect folder IDs
                 long[] folderIDs = folders.Where(f => f.Id != -1).Select(f => f.Id).ToArray();
                 if (folderIDs == null || folderIDs.Length == 0)
                 {
                     throw new InvalidOperationException("No valid folder IDs found.");
                 }
 
-                // Execute the file search
                 string bookmark = string.Empty;
                 ACW.SrchStatus status;
                 ACW.File[] results = docService.FindFilesBySearchConditions(new ACW.SrchCond[] { search }, null, folderIDs, true, true, ref bookmark, out status);
 
-                // Ensure results are found
                 if (results == null || results.Length == 0)
                 {
                     throw new InvalidOperationException($"No files found matching the search criteria: {fileName}");
                 }
 
-                return results[0];  // Return the first result
+                return results[0];
             }
             catch (InvalidOperationException ex)
             {
-                // Log or display specific Vault-related errors
                 Console.WriteLine("File_FindByFileName Failed: " + ex.Message);
                 return null;
             }
         }
 
+        /// <summary>
+        /// Undoes the checkout of a file in Vault.
+        /// </summary>
+        /// <param name="fileName">The name of the file to undo the checkout for.</param>
+        /// <returns>The full path of the file after undoing the checkout.</returns>
         public static string File_UndoCheckOut(string fileName)
         {
             try
             {
-                // Check if Vault connection is valid
                 if (VaultConn.ActiveConnection == null)
                 {
                     throw new InvalidOperationException("Vault connection is not active.");
                 }
 
-                // Check if the fileName is valid
                 if (string.IsNullOrEmpty(fileName))
                 {
                     throw new ArgumentException("File name must have a value to continue.", nameof(fileName));
                 }
 
-                // Find the file by name
                 ACW.File file = File_FindByFileName(fileName);
                 if (file == null)
                 {
                     throw new FileNotFoundException($"File '{fileName}' not found in Vault.");
                 }
 
-                // Get the file iteration and full file path
                 VDF.Vault.Currency.Entities.FileIteration fileIteration = new VDF.Vault.Currency.Entities.FileIteration(VaultConn.ActiveConnection, file);
                 VDF.Vault.Services.Connection.IWorkingFoldersManager services = VaultConn.ActiveConnection.WorkingFoldersManager;
                 string fullFileName = services.GetPathOfFileInWorkingFolder(fileIteration).FullPath;
 
-                // Perform the undo checkout
-
-                if(File_IsCheckedOut(file.Name))
+                if (File_IsCheckedOut(file.Name))
                 {
-                   VaultConn.ActiveConnection.FileManager.UndoCheckoutFile(fileIteration);
+                    VaultConn.ActiveConnection.FileManager.UndoCheckoutFile(fileIteration);
                 }
-                
 
-                // Return the full file path
                 return fullFileName;
             }
             catch (ArgumentException ex)
             {
-                // Handle invalid file name
                 Console.WriteLine($"File_UndoCheckOut Failed: {ex.Message}");
                 return "";
             }
         }
 
+        /// <summary>
+        /// Checks if a file is currently checked out in Vault.
+        /// </summary>
+        /// <param name="fileName">The name of the file to check.</param>
+        /// <param name="toCurrentUser">If true, only check if the file is checked out to the current user.</param>
+        /// <returns>True if the file is checked out; otherwise, false.</returns>
         public static bool File_IsCheckedOut(string fileName, bool toCurrentUser = false)
         {
             try
             {
-                // Check if Vault connection is valid
                 if (VaultConn.ActiveConnection == null)
                 {
                     throw new InvalidOperationException("Vault connection is not active.");
                 }
 
-                // Check if the fileName is valid
                 if (string.IsNullOrEmpty(fileName))
                 {
                     throw new ArgumentException("File name must have a value to continue.", nameof(fileName));
                 }
 
-                // Find the file by name
                 ACW.File file = File_FindByFileName(fileName);
                 if (file == null)
                 {
                     throw new FileNotFoundException($"File '{fileName}' was not found in Vault.");
                 }
 
-                // Get the file iteration
                 VDF.Vault.Currency.Entities.FileIteration fileIteration = new VDF.Vault.Currency.Entities.FileIteration(VaultConn.ActiveConnection, file);
 
-                // Check if the file is checked out
-                if (!toCurrentUser)
-                {
-                    return fileIteration.IsCheckedOut;
-                }
-                else
-                {
-                    return fileIteration.IsCheckedOutToCurrentUser;
-                }
+                return !toCurrentUser ? fileIteration.IsCheckedOut : fileIteration.IsCheckedOutToCurrentUser;
             }
             catch (ArgumentException ex)
             {
-                // Handle invalid file name input
                 Console.WriteLine($"File_IsCheckedOut Failed: {ex.Message}");
                 return false;
             }
         }
 
-        public static  FileAssocParam[] File_GetAssociations(string fileName)
+        /// <summary>
+        /// Retrieves all file associations for the specified file in Vault.
+        /// </summary>
+        /// <param name="fileName">The name of the file to get associations for.</param>
+        /// <returns>An array of <see cref="FileAssocParam"/> objects representing the file associations.</returns>
+        public static FileAssocParam[] File_GetAssociations(string fileName)
         {
             if (VaultConn.ActiveConnection != null)
             {
-
-                ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
+                ACW.File file = File_FindByFileName(fileName);
                 VDF.Vault.Currency.Entities.FileIteration fileIteration = new VDF.Vault.Currency.Entities.FileIteration(VaultConn.ActiveConnection, file);
 
                 VDF.Vault.Settings.FileRelationshipGatheringSettings relationshipSettings = new VDF.Vault.Settings.FileRelationshipGatheringSettings
@@ -359,25 +317,19 @@ namespace ExternalRuleManager
                     IncludeRelatedDocumentation = true
                 };
 
-                // Retrieve the collection of FileAssocLite
                 IEnumerable<ACW.FileAssocLite> fileAssocLite = VaultConn.ActiveConnection.FileManager.GetFileAssociationLites(
                     new long[] { fileIteration.EntityIterationId },
                     relationshipSettings
                 );
 
-                // Create a list to store FileAssocParam objects
                 List<FileAssocParam> fileAssocParams = new List<FileAssocParam>();
 
-                // Check if the collection is not null
                 if (fileAssocLite != null)
                 {
-                    // Iterate over the FileAssocLite collection
                     foreach (ACW.FileAssocLite thisFileAssocLite in fileAssocLite)
                     {
-                        // Exclude the child file that matches the current file iteration
                         if (thisFileAssocLite.CldFileId != fileIteration.EntityIterationId)
                         {
-                            // Create a new FileAssocParam object
                             FileAssocParam par = new FileAssocParam
                             {
                                 CldFileId = thisFileAssocLite.CldFileId,
@@ -387,47 +339,43 @@ namespace ExternalRuleManager
                                 ExpectedVaultPath = thisFileAssocLite.ExpectedVaultPath
                             };
 
-                            // Add the FileAssocParam object to the list
                             fileAssocParams.Add(par);
                         }
                     }
                 }
 
-                // Convert the List<FileAssocParam> to an array and return it
                 return fileAssocParams.ToArray();
             }
 
             return null;
-
         }
 
-        public static string File_CheckIn(string fileName, string comment) 
+        /// <summary>
+        /// Checks in a file to Vault with the specified comment.
+        /// </summary>
+        /// <param name="fileName">The name of the file to check in.</param>
+        /// <param name="comment">The comment to associate with the check-in.</param>
+        /// <returns>The name of the file after checking it in.</returns>
+        public static string File_CheckIn(string fileName, string comment)
         {
-
             if (VaultConn.ActiveConnection != null)
             {
-                ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
+                ACW.File file = File_FindByFileName(fileName);
 
-                
                 VDF.Vault.Currency.Entities.FileIteration fileIteration = new VDF.Vault.Currency.Entities.FileIteration(VaultConn.ActiveConnection, file);
-
-                Debug.Print(file.Name);
 
                 if (!fileIteration.IsCheckedOut)
                 {
-                    throw new FileNotFoundException("File is not checked out...");
+                    throw new FileNotFoundException("File is not checked out.");
                 }
 
                 VDF.Currency.FilePathAbsolute? filePathAbs = GetFilePathByFile(fileName);
 
-                Debug.Print(filePathAbs.FullPath);
-
                 if (!System.IO.File.Exists(filePathAbs.FullPath))
                 {
-                    Console.WriteLine("The checkin file doesn't exist exist on disk.");
+                    Console.WriteLine("The check-in file doesn't exist on disk.");
                     return "";
                 }
-
 
                 if (fileIteration.IsCheckedOut)
                 {
@@ -436,87 +384,72 @@ namespace ExternalRuleManager
                 }
 
                 return filePathAbs.FileName;
-
             }
 
             return "";
-
-
         }
 
+        /// <summary>
+        /// Gets the file path on disk for a specified Vault file.
+        /// </summary>
+        /// <param name="fileName">The name of the Vault file.</param>
+        /// <returns>A <see cref="VDF.Currency.FilePathAbsolute"/> object representing the file path on disk, or <c>null</c> if the file path cannot be retrieved.</returns>
         public static VDF.Currency.FilePathAbsolute? GetFilePathByFile(string fileName)
         {
             if (VaultConn.ActiveConnection != null)
             {
-                ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
+                ACW.File file = File_FindByFileName(fileName);
 
                 string workingFolder = VaultConn.ActiveConnection.WorkingFoldersManager.GetWorkingFolder("$").FullPath;
 
                 ACW.DocumentService docService = VaultConn.ActiveConnection.WebServiceManager.DocumentService;
-
                 ACW.Folder[] folders = docService.FindFoldersByIds(new long[] { file.FolderId });
 
                 VDF.Currency.FilePathAbsolute filePathAbs = new VDF.Currency.FilePathAbsolute(folders[0].FullName);
-
-
-                string updatedfolderPath = filePathAbs.FullPath.Replace("/", @"\");
-                Debug.Print(updatedfolderPath);
-
-                string folderPathWithWorking = updatedfolderPath.Replace("$\\", workingFolder);
-                Debug.Print(folderPathWithWorking);
-
+                string updatedFolderPath = filePathAbs.FullPath.Replace("/", @"\");
+                string folderPathWithWorking = updatedFolderPath.Replace("$\\", workingFolder);
                 string filePathWithWorking = folderPathWithWorking + @"\" + file.Name;
-                Debug.Print(filePathWithWorking);
 
                 filePathAbs = new VDF.Currency.FilePathAbsolute(filePathWithWorking);
-
                 return filePathAbs;
-
-
             }
 
             return null;
-
-
         }
 
-
+        /// <summary>
+        /// Retrieves the latest version of a file from Vault.
+        /// </summary>
+        /// <param name="fileName">The name of the file to retrieve.</param>
+        /// <returns>The full path of the latest version of the file.</returns>
         public static string File_GetLatest(string fileName)
         {
-            // THIS FUNCTION "GETS" THE LATEST VERSION OF A FILE THAT IS AT A SPECIFIED LIFECYCLE STATE
             try
             {
-
-                // Check Vault connection
                 if (VaultConn.ActiveConnection == null)
                 {
                     throw new InvalidOperationException("Vault connection is not active.");
                 }
 
-                // Get Vault services
                 ACW.DocumentService docService = VaultConn.ActiveConnection.WebServiceManager.DocumentService;
                 VDF.Vault.Services.Connection.IWorkingFoldersManager services = VaultConn.ActiveConnection.WorkingFoldersManager;
 
-                // Find file by name
                 ACW.File file = File_FindByFileName(fileName);
                 if (file == null)
                 {
                     throw new InvalidOperationException($"File '{fileName}' not found.");
                 }
 
-                // Get file iteration and full file path
                 FileIteration fileIteration = new FileIteration(VaultConn.ActiveConnection, file);
                 string fullFileName = services.GetPathOfFileInWorkingFolder(fileIteration).FullPath;
 
-                // Acquire the file from Vault
                 File_Acquire(file, false);
 
                 return fullFileName;
             }
             catch (ArgumentException ex)
             {
-                // Handle invalid arguments
-                Console.WriteLine($"File_GetLatestLifecycleStateVersion Failed: {ex.Message}");
+                Console.WriteLine($"File_GetLatest Failed: {ex.Message}");
                 return "";
             }
         }

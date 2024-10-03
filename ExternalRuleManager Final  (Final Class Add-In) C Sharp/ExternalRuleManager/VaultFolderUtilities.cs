@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
-using Autodesk.DataManagement.Client.Framework.Vault.Forms.Settings;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ACW = Autodesk.Connectivity.WebServices;
+﻿using ACW = Autodesk.Connectivity.WebServices;
 using VDF = Autodesk.DataManagement.Client.Framework;
 
 namespace ExternalRuleManager
 {
+    /// <summary>
+    /// Provides utility methods for interacting with folders in Autodesk Vault.
+    /// </summary>
     internal class VaultFolderUtilities
     {
-
+        /// <summary>
+        /// Acquires a Vault folder and downloads its contents to the local working folder.
+        /// </summary>
+        /// <param name="folder">The Vault folder to acquire.</param>
+        /// <returns>The acquired folder, or <c>null</c> if the operation fails.</returns>
+        /// <remarks>
+        /// This method uses Vault connection settings to download folder contents, with options to manage file overwrites
+        /// and relationship gathering settings.
+        /// </remarks>
         public static ACW.Folder Folder_Acquire(ACW.Folder folder)
         {
-
             if (VaultConn.ActiveConnection != null)
             {
                 IntPtr parent = IntPtr.Zero;
@@ -31,38 +27,29 @@ namespace ExternalRuleManager
                 string workingFolder = VaultConn.ActiveConnection.WorkingFoldersManager.GetWorkingFolder("$").FullPath;
 
                 string folderPath = folder.FullName;
-
                 string updatedfolderPath = folderPath.Replace("/", @"\");
-
                 string folderPathWithWorking = updatedfolderPath.Replace("$\\", workingFolder);
 
-
-                //Check Connection before continuing. 
+                // Ensure Vault is connected before proceeding.
                 if (VaultConn.IsConnected())
                 {
-
                     try
                     {
-                        //Create Folder Entity
+                        // Create the folder entity.
                         folderEntity = new VDF.Vault.Currency.Entities.Folder(VaultConn.ActiveConnection, folder);
                     }
                     catch (Exception)
                     {
-
                         throw;
                     }
 
-
-
-
-                    //*******************************************************************************************
-                    // DEFINE SETTINGS
-                    //*******************************************************************************************
+                    // Define settings for acquiring the folder.
                     settings = new VDF.Vault.Forms.Settings.InteractiveAcquireFileSettings(VaultConn.ActiveConnection, parent, "Download files");
                     settings.OptionsResolution.OverwriteOption = VDF.Vault.Settings.AcquireFilesSettings.AcquireFileResolutionOptions.OverwriteOptions.ForceOverwriteAll;
                     settings.DefaultAcquisitionOption = VDF.Vault.Settings.AcquireFilesSettings.AcquisitionOption.Download;
                     settings.OptionsResolution.SyncWithRemoteSiteSetting = VDF.Vault.Settings.AcquireFilesSettings.SyncWithRemoteSite.Always;
 
+                    // Set relationship gathering options.
                     settings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeAttachments = false;
                     settings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeChildren = false;
                     settings.OptionsRelationshipGathering.FileRelationshipSettings.IncludeHiddenEntities = false;
@@ -75,7 +62,6 @@ namespace ExternalRuleManager
 
                     if (folderEntity != null)
                     {
-
                         try
                         {
                             settings.AddEntityToAcquire(folderEntity);
@@ -84,27 +70,26 @@ namespace ExternalRuleManager
                         }
                         catch (Exception)
                         {
-                            MessageBox.Show("Acquiring file failed.", "Error", MessageBoxButtons.OK);
+                            MessageBox.Show("Acquiring folder failed.", "Error", MessageBoxButtons.OK);
                             throw;
                         }
-
-
                     }
-
                 }
             }
-
             return null;
-
         }
 
+        /// <summary>
+        /// Retrieves Vault folders based on their name.
+        /// </summary>
+        /// <param name="folderName">The name of the folder to search for.</param>
+        /// <returns>An array of <see cref="ACW.Folder"/> objects matching the specified name, or <c>null</c> if none are found.</returns>
         public static ACW.Folder[]? GetFoldersByFolderName(string folderName)
         {
             ACW.Folder[]? folders = null;
             ACW.SrchCond searchCondition = new ACW.SrchCond();
             string bookmark = "";
             ACW.SrchStatus status;
-
 
             if (VaultConn.IsConnected())
             {
@@ -115,11 +100,9 @@ namespace ExternalRuleManager
 
                 searchCondition.PropDefId = propDef.Id;
                 searchCondition.PropTyp = ACW.PropertySearchType.SingleProperty;
-                searchCondition.SrchOper = 3;
+                searchCondition.SrchOper = 3; // Search operator
                 searchCondition.SrchRule = ACW.SearchRuleType.Must;
                 searchCondition.SrchTxt = folderName;
-
-
 
                 try
                 {
@@ -130,7 +113,6 @@ namespace ExternalRuleManager
                     // No folders found
                     return null;
                 }
-
 
                 return folders;
             }

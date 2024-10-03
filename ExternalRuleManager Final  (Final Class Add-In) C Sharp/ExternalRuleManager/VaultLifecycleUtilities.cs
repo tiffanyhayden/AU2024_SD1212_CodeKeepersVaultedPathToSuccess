@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ACW = Autodesk.Connectivity.WebServices;
-using VDF = Autodesk.DataManagement.Client.Framework;
+﻿using ACW = Autodesk.Connectivity.WebServices;
 
 namespace ExternalRuleManager
 {
+    /// <summary>
+    /// Provides utility methods for interacting with lifecycle states of files in Autodesk Vault.
+    /// </summary>
     internal class VaultLifecycleUtilities
     {
-
+        /// <summary>
+        /// Retrieves the current lifecycle state of the latest version of a specified file in Autodesk Vault.
+        /// </summary>
+        /// <param name="filename">The name of the file to get the lifecycle state for.</param>
+        /// <returns>
+        /// The lifecycle state name of the latest version of the specified file, or an empty string if an error occurs.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">Thrown when the Vault connection is not active.</exception>
+        /// <exception cref="ArgumentException">Thrown when the <paramref name="filename"/> is null or empty.</exception>
+        /// <exception cref="FileNotFoundException">Thrown when the specified file is not found in Vault.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when no versions of the file are found.</exception>
         public static string GetLifecycleState(string filename)
         {
             try
@@ -21,7 +28,7 @@ namespace ExternalRuleManager
                     throw new InvalidOperationException("Vault connection is not active.");
                 }
 
-                // Check if the fileName is valid
+                // Check if the filename is valid
                 if (string.IsNullOrEmpty(filename))
                 {
                     throw new ArgumentException("File name must have a value to continue.", nameof(filename));
@@ -58,16 +65,15 @@ namespace ExternalRuleManager
             }
         }
 
+
+        //public static string MoveLifeCycleState(string fileName)
+        //{
+        //    ACW.DocumentServiceExtensions docServiceExt = VaultConn.ActiveConnection.WebServiceManager.DocumentServiceExtensions;
+
+        //    ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
+        //    ACW.File[] files = docServiceExt.UpdateFileLifeCycleStates()
+
+        //}
     }
-
-    //public static string MoveLifeCycleState(string fileName)
-    //{
-    //    ACW.DocumentServiceExtensions docServiceExt = VaultConn.ActiveConnection.WebServiceManager.DocumentServiceExtensions;
-
-    //    ACW.File file = VaultFileUtilities.File_FindByFileName(fileName);
-    //    ACW.File[] files = docServiceExt.UpdateFileLifeCycleStates()
-
-    //}
-
 
 }
