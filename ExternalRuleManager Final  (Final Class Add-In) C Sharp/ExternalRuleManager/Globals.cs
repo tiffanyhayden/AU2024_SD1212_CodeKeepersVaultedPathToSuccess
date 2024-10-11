@@ -133,6 +133,10 @@
         /// <summary>
         /// A constant string that stores the path of the external rules directory.
         /// </summary>
-        public const string ExternalRuleDir = "C:\\AU2024\\AU\\EXTERNAL RULES";
+        public static string ExternalRuleDir = "C:\\AU2024\\AU\\EXTERNAL RULES";
+
+
+
+
     }
 }

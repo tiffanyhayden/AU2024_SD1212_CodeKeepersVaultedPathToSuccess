@@ -3,6 +3,7 @@ using Inventor;
 using System.Data;
 using ACW = Autodesk.Connectivity.WebServices;
 using Autodesk.iLogic.Interfaces;
+using Autodesk.iLogic.Automation;
 
 namespace ExternalRuleManager
 {
@@ -16,7 +17,7 @@ namespace ExternalRuleManager
         public static ComboBoxDefinition ExternalRules { get; set; }
 
         public ComboBoxDefinition CurrentLifecycleState { get; set; }
-        public static ComboBoxDefinition LocalRules { get; set; }
+        public ComboBoxDefinition LocalRules { get; set; }
 
 
         public ButtonDefinition GetLatestAllRules { get; set; }
@@ -27,44 +28,78 @@ namespace ExternalRuleManager
         public ButtonDefinition UndoCheckOut { get; set; }
         public ButtonDefinition MakeLocalCopy { get; set; }
         public ButtonDefinition OverwriteRuleOnDiskWithCopy { get; set; }
-        public static ButtonDefinition Refresh { get; set; }
-        public static ButtonDefinition RunRule { get; set; }
+        public ButtonDefinition Refresh { get; set; }
+        public ButtonDefinition RunRule { get; set; }
 
+        public ButtonDefinition SetExternalRulePath { get; set; }   
 
-        public bool isExternalRulesInitialized = false;
-
-        private RibbonTab externalRuleManagerRibbonZeroDocTab;
-        private RibbonTab externalRuleManagerRibbonPartTab;
-        private RibbonTab externalRuleManagerRibbonAssyTab;
-        private RibbonTab externalRuleManagerRibbonDwgTab;
+        private RibbonTab _externalRuleManagerRibbonTab;
         
 
 
-        private RibbonPanel manageRibbonPanel;
-        private RibbonPanel statusRibbonPanel;
-        private RibbonPanel allRulesRibbonPanel;
-        private RibbonPanel lifecycleRibbonPanel;
-        private RibbonPanel LocalRibbonPanel;
-        private RibbonPanel localRulesRibbon;
+        private RibbonPanel _manageRibbonPanel;
+        private RibbonPanel _statusRibbonPanel;
+        private RibbonPanel _allRulesRibbonPanel;
+        private RibbonPanel _lifecycleRibbonPanel;
+        private RibbonPanel _localRibbonPanel;
+        private RibbonPanel _localRulesRibbon;
 
-        private System.Drawing.Image image16x16;
-        private System.Drawing.Image image32x32;
-        private System.Drawing.Image checkIn16x16;
-        private System.Drawing.Image checkIn32x32;
-        private System.Drawing.Image checkOut16x16;
-        private System.Drawing.Image checkOut32x32;
-        private System.Drawing.Image undoCheckout16x16;
-        private System.Drawing.Image undoCheckout32x32;
-        private System.Drawing.Image copy16x16;
-        private System.Drawing.Image copy32x32;
-        private System.Drawing.Image get16x16;
-        private System.Drawing.Image get32x32;
-        private System.Drawing.Image overwrite16x16;
-        private System.Drawing.Image overwrite32x32;
-        private System.Drawing.Image refresh16x16;
-        private System.Drawing.Image refresh32x32;
-        private System.Drawing.Image runRule16x16;
-        private System.Drawing.Image runRule32x32;
+        private System.Drawing.Image _image16x16;
+        private System.Drawing.Image _image32x32;
+        private System.Drawing.Image _checkIn16x16;
+        private System.Drawing.Image _checkIn32x32;
+        private System.Drawing.Image _checkOut16x16;
+        private System.Drawing.Image _checkOut32x32;
+        private System.Drawing.Image _undoCheckout16x16;
+        private System.Drawing.Image _undoCheckout32x32;
+        private System.Drawing.Image _copy16x16;
+        private System.Drawing.Image _copy32x32;
+        private System.Drawing.Image _get16x16;
+        private System.Drawing.Image _get32x32;
+        private System.Drawing.Image _overwrite16x16;
+        private System.Drawing.Image _overwrite32x32;
+        private System.Drawing.Image _refresh16x16;
+        private System.Drawing.Image _refresh32x32;
+        private System.Drawing.Image _runRule16x16;
+        private System.Drawing.Image _runRule32x32;
+        private System.Drawing.Image _setRule16x16;
+        private System.Drawing.Image _setRule32x32;
+
+        private bool IsExternalRuleSelected()
+        {
+            return ExternalRules.ListIndex != 1;
+        }
+
+
+        private void LoadButtonImages()
+        {
+            // Load images for the ribbon buttons from resources
+            _image16x16 = LoadImage(Resources._16x16);
+            _image32x32 = LoadImage(Resources._32x32);
+            _checkIn16x16 = LoadImage(Resources.CheckIn_16x16);
+            _checkIn32x32 = LoadImage(Resources.CheckIn_32x32);
+            _checkOut16x16 = LoadImage(Resources.CheckOut_16x16);
+            _checkOut32x32 = LoadImage(Resources.CheckOut_32x32);
+            _undoCheckout16x16 = LoadImage(Resources.UndoCheckout_16x16);
+            _undoCheckout32x32 = LoadImage(Resources.UndoCheckout_32x32);
+            _copy16x16 = LoadImage(Resources.Copy_16x16);
+            _copy32x32 = LoadImage(Resources.Copy_32x32);
+            _get16x16 = LoadImage(Resources.Get_16x16);
+            _get32x32 = LoadImage(Resources.Get_32x32);
+            _overwrite16x16 = LoadImage(Resources.Overwrite_16x16);
+            _overwrite32x32 = LoadImage(Resources.Overwrite_32x32);
+            _refresh16x16 = LoadImage(Resources.Refresh_16x16);
+            _refresh32x32 = LoadImage(Resources.Refresh_32x32);
+            _runRule16x16 = LoadImage(Resources.RunRule_16x16);
+            _runRule32x32 = LoadImage(Resources.RunRule_32x32);
+            _setRule16x16 = LoadImage(Resources.Settings_16x16);
+            _setRule32x32 = LoadImage(Resources.Settings_32x32);
+        }
+
+        private System.Drawing.Image LoadImage(byte[] resource)
+        {
+            return ByteArrayToImage(resource);
+        }
 
 
         #endregion
@@ -77,63 +112,51 @@ namespace ExternalRuleManager
         /// </summary>
         public CustomRibbon()
         {
+            LoadButtonImages();
 
-            // Load images for the ribbon buttons from resources
-            image16x16 = ByteArrayToImage(Resources._16x16);
-            image32x32 = ByteArrayToImage(Resources._32x32);
-            checkIn16x16 = ByteArrayToImage(Resources.CheckIn_16x16);
-            checkIn32x32 = ByteArrayToImage(Resources.CheckIn_32x32);
-            checkOut16x16 = ByteArrayToImage(Resources.CheckOut_16x16);
-            checkOut32x32 = ByteArrayToImage(Resources.CheckOut_32x32);
-            undoCheckout16x16 = ByteArrayToImage(Resources.UndoCheckout_16x16);
-            undoCheckout32x32 = ByteArrayToImage(Resources.UndoCheckout_32x32);
-            copy16x16 = ByteArrayToImage(Resources.Copy_16x16);
-            copy32x32 = ByteArrayToImage(Resources.Copy_32x32);
-            get16x16 = ByteArrayToImage(Resources.Get_16x16);
-            get32x32 = ByteArrayToImage(Resources.Get_32x32);
-            overwrite16x16 = ByteArrayToImage(Resources.Overwrite_16x16);
-            overwrite32x32 = ByteArrayToImage(Resources.Overwrite_32x32);
-            refresh16x16 = ByteArrayToImage(Resources.Refresh_16x16);
-            refresh32x32 = ByteArrayToImage(Resources.Refresh_32x32);
-            runRule16x16 = ByteArrayToImage(Resources.RunRule_16x16);
-            runRule32x32 = ByteArrayToImage(Resources.RunRule_32x32);
 
             // Create ComboBoxes and Buttons
             ExternalRules = Utilities.CreateComboBoxDef("External Rules", "ExternalRules", CommandTypesEnum.kQueryOnlyCmdType, 200);
             ExternalRules.OnSelect += ExternalRules_OnSelect;
 
-            Refresh = Utilities.CreateButtonDef("Refresh", "CustomRefresh", "", refresh16x16, refresh32x32);
+
+            SetExternalRulePath = Utilities.CreateButtonDef("Set External Rule Path", "SetExternalRulePath", "", _setRule16x16, _setRule32x32);
+            SetExternalRulePath.OnExecute += SetExternalRulePath_OnExecute;
+
+            Refresh = Utilities.CreateButtonDef("Refresh", "CustomRefresh", "", _refresh16x16, _refresh32x32);
             Refresh.OnExecute += Refresh_OnExecute;
 
-            GetLatestAllRules = Utilities.CreateButtonDef("Get Latest", "GetLatestAllRules", "", get16x16, get32x32);
+            GetLatestAllRules = Utilities.CreateButtonDef("Get Latest", "GetLatestAllRules", "", _get16x16, _get32x32);
             GetLatestAllRules.OnExecute += GetLatestAllRules_OnExecute;
 
-            GetLatestReleasedAllRules = Utilities.CreateButtonDef("Get Latest Released Version", "GetLatestReleasedVersionAllRules", "", get16x16, get32x32);
+            GetLatestReleasedAllRules = Utilities.CreateButtonDef("Get Latest Released Version", "GetLatestReleasedVersionAllRules", "", _get16x16, _get32x32);
             GetLatestReleasedAllRules.OnExecute += GetLatestReleasedAllRules_OnExecute;
 
-            Get = Utilities.CreateButtonDef("Get", "VaultGet", "", get16x16, get32x32);
+            Get = Utilities.CreateButtonDef("Get", "VaultGet", "", _get16x16, _get32x32);
             Get.OnExecute += Get_OnExecute;
 
-            CheckIn = Utilities.CreateButtonDef("Check In", "Checkin", "", checkIn16x16, checkIn32x32);
+            CheckIn = Utilities.CreateButtonDef("Check In", "Checkin", "", _checkIn16x16, _checkIn32x32);
             CheckIn.OnExecute += CheckIn_OnExecute;
 
-            CheckOut = Utilities.CreateButtonDef("Check Out", "Checkout", "", checkOut16x16, checkOut32x32);
+            CheckOut = Utilities.CreateButtonDef("Check Out", "Checkout", "", _checkOut16x16, _checkOut32x32);
             CheckOut.OnExecute += CheckOut_OnExecute;
 
-            UndoCheckOut = Utilities.CreateButtonDef("Undo Check Out", "UndoCheckOut", "", undoCheckout16x16, undoCheckout32x32);
+            UndoCheckOut = Utilities.CreateButtonDef("Undo Check Out", "UndoCheckOut", "", _undoCheckout16x16, _undoCheckout32x32);
             UndoCheckOut.OnExecute += UndoCheckOut_OnExecute;
 
             CurrentLifecycleState = Utilities.CreateComboBoxDef("Current Lifecycle State", "CurrentLifecycleState", CommandTypesEnum.kQueryOnlyCmdType, 200);
             CurrentLifecycleState.Enabled = false;
 
-            MakeLocalCopy = Utilities.CreateButtonDef("Make Local Copy", "MakeLocalCopy", "", copy16x16, copy32x32);
+            MakeLocalCopy = Utilities.CreateButtonDef("Make Local Copy", "MakeLocalCopy", "", _copy16x16, _copy32x32);
             MakeLocalCopy.OnExecute += MakeLocalCopy_OnExecute;
 
-            OverwriteRuleOnDiskWithCopy = Utilities.CreateButtonDef("Overwrite Rule\r\nWith Copy", "OverwriteRuleOnDiskWithCopy", "", overwrite16x16, overwrite32x32);
+            OverwriteRuleOnDiskWithCopy = Utilities.CreateButtonDef("Overwrite Rule\r\nWith Copy", "OverwriteRuleOnDiskWithCopy", "", _overwrite16x16, _overwrite32x32);
             OverwriteRuleOnDiskWithCopy.OnExecute += OverwriteRuleOnDiskWithCopy_OnExecute;
 
-            RunRule = Utilities.CreateButtonDef("Run Rule", "RunRule", "", runRule16x16, runRule32x32);
+            RunRule = Utilities.CreateButtonDef("Run Rule", "RunRule", "", _runRule16x16, _runRule32x32);
             RunRule.OnExecute += RunRule_OnExecute;
+
+
 
             // Add to specific ribbons
             Ribbon partRibbon = Globals.InvApp.UserInterfaceManager.Ribbons["Part"];
@@ -147,6 +170,8 @@ namespace ExternalRuleManager
             AddToRibbon(zeroDocRibbon);
 
             UIDisable(Globals.InvApp.ActiveDocument);
+
+            Utilities.SetExternalRuleDirectory("");
         }
 
         /// <summary>
@@ -156,10 +181,8 @@ namespace ExternalRuleManager
         /// <returns>An Image object created from the byte array.</returns>
         private System.Drawing.Image ByteArrayToImage(byte[] byteArray)
         {
-            using (MemoryStream ms = new MemoryStream(byteArray))
-            {
-                return System.Drawing.Image.FromStream(ms);
-            }
+            using var ms = new MemoryStream(byteArray);
+            return System.Drawing.Image.FromStream(ms);
         }
 
         /// <summary>
@@ -169,33 +192,36 @@ namespace ExternalRuleManager
         public void AddToRibbon(Ribbon targetRibbon)
         {
             // Create and add ribbon tabs and panels
-            externalRuleManagerRibbonZeroDocTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManagerZeroDocTab" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _externalRuleManagerRibbonTab = targetRibbon.RibbonTabs.Add("External Rule Manager", "id_ExternalRuleManagerZeroDocTab" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            manageRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Manage","id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _manageRibbonPanel = _externalRuleManagerRibbonTab.RibbonPanels.Add("Manage","id_Manage" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            allRulesRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("All Rules","id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _allRulesRibbonPanel = _externalRuleManagerRibbonTab.RibbonPanels.Add("All Rules","id_AllRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            statusRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _statusRibbonPanel = _externalRuleManagerRibbonTab.RibbonPanels.Add("Status", "id_Status" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            lifecycleRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Lifecycle","id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _lifecycleRibbonPanel = _externalRuleManagerRibbonTab.RibbonPanels.Add("Lifecycle","id_Lifecycle" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            LocalRibbonPanel = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Local (C:)","id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _localRibbonPanel = _externalRuleManagerRibbonTab.RibbonPanels.Add("Local (C:)","id_Local" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
-            localRulesRibbon = externalRuleManagerRibbonZeroDocTab.RibbonPanels.Add("Local Rules","id_LocalRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
+            _localRulesRibbon = _externalRuleManagerRibbonTab.RibbonPanels.Add("Local Rules","id_LocalRules" + targetRibbon.InternalName, Globals.InvAppGuidID);
 
             // Add command controls to ribbon panels
-            manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
-            manageRibbonPanel.CommandControls.AddButton(Refresh, true);
-            manageRibbonPanel.CommandControls.AddButton(RunRule, true);
-            allRulesRibbonPanel.CommandControls.AddButton(GetLatestAllRules);
-            allRulesRibbonPanel.CommandControls.AddButton(GetLatestReleasedAllRules);
-            statusRibbonPanel.CommandControls.AddButton(Get, true);
-            statusRibbonPanel.CommandControls.AddButton(CheckIn, true);
-            statusRibbonPanel.CommandControls.AddButton(CheckOut, true);
-            statusRibbonPanel.CommandControls.AddButton(UndoCheckOut, true);
-            lifecycleRibbonPanel.CommandControls.AddComboBox(CurrentLifecycleState);
-            LocalRibbonPanel.CommandControls.AddButton(MakeLocalCopy, true);
-            LocalRibbonPanel.CommandControls.AddButton(OverwriteRuleOnDiskWithCopy, true);
+            _manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
+            _manageRibbonPanel.CommandControls.AddButton(SetExternalRulePath);
+            _manageRibbonPanel.CommandControls.AddButton(Refresh, true);
+            _manageRibbonPanel.CommandControls.AddButton(RunRule, true);
+            
+            _allRulesRibbonPanel.CommandControls.AddButton(GetLatestAllRules);
+            _allRulesRibbonPanel.CommandControls.AddButton(GetLatestReleasedAllRules);
+            _statusRibbonPanel.CommandControls.AddButton(Get, true);
+            _statusRibbonPanel.CommandControls.AddButton(CheckIn, true);
+            _statusRibbonPanel.CommandControls.AddButton(CheckOut, true);
+            _statusRibbonPanel.CommandControls.AddButton(UndoCheckOut, true);
+            _lifecycleRibbonPanel.CommandControls.AddComboBox(CurrentLifecycleState);
+            _localRibbonPanel.CommandControls.AddButton(MakeLocalCopy, true);
+            _localRibbonPanel.CommandControls.AddButton(OverwriteRuleOnDiskWithCopy, true);
+
         }
 
 
@@ -211,6 +237,8 @@ namespace ExternalRuleManager
         private void Refresh_OnExecute(NameValueMap context)
         {
             RefreshUI();
+
+            LoadExternalRules();
         }
 
         /// <summary>
@@ -220,6 +248,48 @@ namespace ExternalRuleManager
         private void ExternalRules_OnSelect(NameValueMap context)
         {
             RefreshUI();
+        }
+
+        /// <summary>
+        /// Executes the process of setting the path for external rules by prompting the user with a folder browser dialog.
+        /// The selected folder path is then applied to the external rule directories.
+        /// </summary>
+        /// <param name="context">The context for the current execution, provided by <see cref="NameValueMap"/>.</param>
+        /// <remarks>
+        /// This method opens a <see cref="FolderBrowserDialog"/> to allow the user to choose a directory. 
+        /// The chosen path is assigned to the application's external rule directories using the iLogic automation interface.
+        /// Make sure that <c>Globals.InvApp.ActiveDocument</c> is properly initialized before invoking this method to avoid null reference exceptions.
+        /// </remarks>
+        private void SetExternalRulePath_OnExecute(NameValueMap context)
+        {
+            RefreshUI();
+
+            // Create a new instance of the FolderBrowserDialog
+            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+
+
+            {
+                // Set the description that will be displayed in the dialog
+                folderBrowserDialog.Description = "Select a folder";
+
+                // Optionally set the initial directory if needed
+                folderBrowserDialog.SelectedPath = "C:\\";
+
+                // Show the dialog and check if the user clicked the OK button
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the selected folder path
+                    string selectedPath = folderBrowserDialog.SelectedPath;
+
+                    IStandardObjectProvider SOP = StandardObjectFactory.Create(Globals.InvApp.ActiveDocument);
+
+                    SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = [selectedPath];
+
+                    // Perform actions with the selected folder path
+                    //MessageBox.Show($"Selected folder: {selectedPath}", "Folder Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
         }
 
         /// <summary>
@@ -406,7 +476,7 @@ namespace ExternalRuleManager
 
             if (files != null && files.Length > 0)
             {
-                if (ExternalRules.ListIndex != 1)
+                if (IsExternalRuleSelected())
                 {
                     ExternalRules.Clear();
                     List<ACW.File> sortedFiles = files.OrderBy(file => file.Name).ToList();
@@ -443,10 +513,11 @@ namespace ExternalRuleManager
                 CurrentLifecycleState.Clear();
                 CurrentLifecycleState.ListIndex = 0;
                 RunRule.Enabled = false;
+                
             }
             else
             {
-                if (ExternalRules.ListIndex != 1)
+                if (IsExternalRuleSelected())
                 {
                     ACW.File file = VaultFileUtilities.File_FindByFileName(selectedItemName);
 
@@ -464,6 +535,7 @@ namespace ExternalRuleManager
                         OverwriteRuleOnDiskWithCopy.Enabled = true;
                         RunRule.Enabled = currentRibbon != "ZeroDoc";
                         ResetCurrentLifecycleDropdown();
+                        
                     }
                 }
             }
@@ -513,7 +585,7 @@ namespace ExternalRuleManager
         /// Populates the ExternalRules ComboBox with the combined list of rules.
         /// </summary>
         /// <exception cref="ArgumentException">Thrown when the local directory is not found.</exception>
-        public void LoadRules()
+        public void LoadExternalRules()
         {
             VaultConn.InitializeConnection();
             ACW.File[]? vaultFiles = VaultUtilities.GetFilesByFolder(Globals.ExternalRuleName);
@@ -557,7 +629,8 @@ namespace ExternalRuleManager
         public void UIEnable(Inventor.Document document)
         {
             ExternalRules.Enabled = true;
-            Refresh.Enabled = false;
+            SetExternalRulePath.Enabled = true;
+            Refresh.Enabled = true;
             GetLatestAllRules.Enabled = false;
             GetLatestReleasedAllRules.Enabled = false;
             Get.Enabled = false;
@@ -591,7 +664,19 @@ namespace ExternalRuleManager
         }
 
 
+        private ComboBoxDefinition CreateNewComboBox(string displayName, string internalName, int width = 200)
+        {
+            var comboBox = Utilities.CreateComboBoxDef(displayName, internalName, CommandTypesEnum.kQueryOnlyCmdType, width);
+            comboBox.OnSelect += (context) => RefreshUI();
+            return comboBox;
+        }
 
+        private ButtonDefinition CreateNewButton(string displayName, string internalName, System.Drawing.Image icon16, System.Drawing.Image icon32)
+        {
+            var button = Utilities.CreateButtonDef(displayName, internalName, "", icon16, icon32);
+            button.OnExecute += (context) => RefreshUI();  // Replace with actual handler as needed.
+            return button;
+        }
 
 
 

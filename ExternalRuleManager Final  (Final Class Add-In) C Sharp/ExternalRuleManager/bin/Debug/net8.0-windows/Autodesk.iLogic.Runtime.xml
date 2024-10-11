@@ -1,0 +1,781 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Autodesk.iLogic.Runtime</name>
+    </assembly>
+    <members>
+        <member name="F:Autodesk.InventorBuilder.VersionInfo.AssemblyVersion">
+            <summary>
+            Inventor Build Number Centralization(for C# projects)
+            This holds central version numbers for .NET assemblies.
+            </summary>
+        </member>
+        <member name="F:Autodesk.InventorBuilder.VersionInfo.CopyRightFrom1996">
+            <summary>
+            Inventor Copyright Year Centralization(for C# projects)
+            To update the copyright year for all executables and About dialogs, 
+            we need to change the end year in below block, for example, 
+            for Ada release, replace all end years with 2020.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.CadDoc">
+             <summary>
+             Easy access to components of an Inventor filename, and other file-related functions. 
+             An instance of this class (named ThisDoc) is created in a rule.
+             </summary>
+             <remarks></remarks>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.CadDoc.Document">
+            <summary>
+            Gets the Inventor Document from which this rule is being run.
+            If the rule is not external, this will be the document in which the rule is stored.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.CadDoc.ModelDocument">
+            <summary>
+            Gets the Inventor Document from which this rule is being run.
+            If the rule is not external, this will be the document in which the rule is stored.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.DocumentUtils.DisplayNameExt(Inventor.Document)">
+             <summary>
+             Get the document filename with extension.
+             </summary>
+             <param name="doc"></param>
+             <returns>the document filename with extension</returns>
+             <remarks>
+             doc.DisplayName can leave off the extension if the Windows Explorer setting is
+             "Hide extensions for known file types"
+             This function will always return the filename with extension, unless the document has not been saved.
+             </remarks>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.DpiConverter.DipToPixels(System.Int32,System.Double)">
+            <summary>
+            Convert device-independent pixels to physical pixels.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.DpiConverter.DipToPixelsInX(System.Int32)">
+            <summary>
+            Convert device-independent pixels to physical pixels in the X direction.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.DpiConverter.DipToPixelsInY(System.Int32)">
+            <summary>
+            Convert device-independent pixels to physical pixels in the X direction.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.DpiConverter.DipToPixelsConversionFactors">
+            <summary>
+            Get an array of multiplicative factors that can be used to convert width and height (in that order)
+            from device-independent pixels to physical pixels.
+            pixels = factor * DIP
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.CadViewBalloons">
+            <summary>
+            Provide a function to re-attach balloons to components in an assembly drawing, or move them to an invisible layer if they can't be attached.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.CadViewBalloons.FindClosestPoint(Inventor.Point2d,Inventor.Point2d,Autodesk.iLogic.Runtime.ComponentBalloonEligibility)">
+            <summary>
+            Find the closest point (on any eligible drawing curve) to "pos", then use "basePoint" (if not null) to get a "better" close point
+            on that curve.
+            </summary>
+            <param name="pos"></param>
+            <param name="basePoint"></param>
+            <param name="componentTest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.PromptedEntryTextBox">
+            <summary>
+            Store a text box that contains a prompted entry.  Each entry has a UniqueID.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.FileUtil">
+            <summary>
+            Mostly path-related utilities for Inventor files.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.FileUtil.GetRelativeFileNames(System.String,Inventor.Document,Inventor.InventorServerObject)">
+             <summary>
+             Get full document-relative and project-relative paths for the given relative path name.
+             </summary>
+            <remarks>
+             The function name is misleading. It returns a collection of absolute paths. The input is a relative path.
+            </remarks>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.FileUtil.AbsoluteFileNameRelativeToDoc(System.String,Inventor.Document,Inventor.InventorServerObject,System.Boolean)">
+             <summary>
+             Try to find a file specified by a relative or absolute name.  
+             If found, return an absolute file path for the file.
+             </summary>
+             <param name="fileNameA"></param>
+             <param name="doc"></param>
+             <param name="server"></param>
+             <param name="tryProject"></param>
+             <returns></returns>
+             <remarks>
+             NOTE: this cannot be used for assembly document names with LOD names appended.  But it could be adapted for that purpose.
+             </remarks>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.FileUtil.MatchesPartialPath(System.String,System.String)">
+            <summary>
+            Tests to see if two file names, paths, or partial paths could be equivalent.
+            This is used for external rule file paths.
+            The first argument might be a full path, or it might only contain the last levels of the path including filename.
+            The second argument is a full path.
+            </summary>
+            <param name="lastLevels">At least the filename, usually without extension. Might include some last levels or all of the path.</param>
+            <param name="fileName">A full path.</param>
+            <returns></returns>
+        </member>
+        <member name="F:Autodesk.iLogic.Runtime.InputListBoxDialog.heightWanted">
+            <summary> Height set explicitly by the caller. </summary>
+        </member>
+        <member name="F:Autodesk.iLogic.Runtime.InputListBoxDialog.widthWanted">
+            <summary> Width set explicitly by the caller. </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.InputListBoxDialog.#ctor(System.String,System.String,System.String,System.Collections.IEnumerable,System.Object,System.Int32,System.Int32)">
+            <summary>
+            Create a new InputListBoxDialog.
+            </summary>
+            <param name="DialogTitle">title of the dialog</param>
+            <param name="ListName">title of the list</param>
+            <param name="Instructions">prompt string</param>
+            <param name="items">list of items</param>
+            <param name="defaultValue"></param>
+            <param name="width">Dialog width in Device Independent Pixels. If this is zero, the width will be sized to fit the contents.</param>
+            <param name="height">Dialog height in Device Independent Pixels. If this is zero, the width will be sized to fit the contents.</param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.InputListBoxDialog.OnLoad(System.EventArgs)">
+             <summary>
+             Override to fill list box from list of items, and set initially selected item.
+             </summary>
+             <param name="e"></param>
+             <remarks></remarks>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.InputListBoxDialog.OnTextboxContentsResized(System.Object,System.Windows.Forms.ContentsResizedEventArgs)">
+            <summary>
+            Set the height of the prompt textbox to match its contents.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.InventorEntities.UcsFinder">
+            <summary>
+            Provides methods to find a UCS (or origin workplanes) in a document or component.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.InventorEntities.UcsInComponent">
+            <summary>
+            A UCS in a component occurrence. if the occurrence is null, then the UCS is in the containing assembly document.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.InventorEntities.UcsInComponent.Transformation">
+            <summary>
+            Get the transformation in the space of the containing assembly.
+            </summary>
+            <returns>
+            A matrix or null. A null return should be interpreted as the identity matrix.
+            </returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.InventorEntities.UcsInComponent.GetWorkPlane(Inventor.UserCoordinateSystem,System.Int32)">
+            <summary>
+            Get a UCS workplane, with the indices following the same order as the Constraint Set command uses.
+            </summary>
+            <param name="ucs"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.InventorEntities.UcsInComponent.GetWorkplaneIndex(Inventor.UserCoordinateSystem,Inventor.WorkPlane)">
+            <summary>
+            Get the index of the workplane in the UCS that contains it.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.InventorEntities.UcsWorkplaneInComponent">
+            <summary>
+            A work plane within a UcsInComponent.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.InventorEntities.UcsOrOrigin">
+            <summary>
+            Wrap either a UCS or the origin planes.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.InventorEntities.UcsOrOrigin.IsSameUcs(Autodesk.iLogic.Runtime.InventorEntities.UcsOrOrigin)">
+            <summary>
+            See if the other is referring to the same UCS. 
+            The caller must also check to see if the occurrences are the same.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.LmiMath">
+             <summary>
+             Provides math functions that are not found in the standard System.Math namespace.
+             Some of these are similar to the functions that are available for Inventor parameter expressions (e.g. in the Parameters dialog).
+             </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.Ceil(System.Double)">
+            <summary>
+            Returns the smallest integral value that is greater than or equal to the specified number.
+            (This uses the standard .NET Math.Ceiling method.)
+            </summary>
+            <param name="d"></param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.Sign0(System.Double)">
+            <summary>
+            Returns an integer that indicates the sign of a number.
+            </summary>
+            <param name="d">A number.</param>
+            <returns>
+            1 if the number is greater than zero.
+            0 if the number is zero or negative.
+            </returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.Ln(System.Double)">
+            <summary>
+            Returns the natural (base e) logarithm of a specified number.
+            (This uses the standard .NET Math.Log method.)
+            </summary>
+            <param name="d"></param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.MaxOfMany(System.Double[])">
+            <summary>
+            Returns the largest value from a list of two or more numbers.
+            Example:
+              min = MaxOfMany(x, y, 12)
+            </summary>
+            <param name="values"></param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.MinOfMany(System.Double[])">
+            <summary>
+            Returns the smallest value from a list of two or more numbers.
+            Example:
+              min = MinOfMany(x, y, 12)
+            </summary>
+            <param name="values"></param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.EqualWithinTolerance(System.Double,System.Double,System.Double)">
+            <summary>
+            Returns True if two numbers are equal within the specified tolerance (that is, almost equal).
+            </summary>
+            <param name="a">First number.</param>
+            <param name="b">Second number.</param>
+            <param name="tolerance">The tolerance.</param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.EqualWithinTolerance(System.Double,System.Double)">
+            <summary>
+            Returns true if the two numbers are equal within a tolerance of 1.0E-7.
+            </summary>
+            <param name="a">First number.</param>
+            <param name="b">Second number.</param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.MakeList(System.Object[])">
+            <summary>
+            Creates an ArrayList from one or more values.
+            </summary>
+            <param name="vals">The values.</param>
+            <returns>An ArrayList that contains the values provided.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.LmiMath.MakePath(System.Object[])">
+            <summary>
+            Defines the path to a component name in a subassembly. 
+            To specify the path, list all subassembly levels in the order they appear in the assembly model browser tree. 
+            This function is required if you want to specify a component name when the same name also exists elsewhere in the assembly. 
+            </summary>
+            <param name="pathLevels">A list of levels that specify the path to the component.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.RoundingMethod">
+            <summary>
+            The method to be used when rounding numbers.
+            </summary>
+        </member>
+        <member name="F:Autodesk.iLogic.Runtime.RoundingMethod.Round">
+            <summary>
+            Round to the nearest multiple of the rounding factor.
+            </summary>
+        </member>
+        <member name="F:Autodesk.iLogic.Runtime.RoundingMethod.RoundUp">
+            <summary>
+            Round up to a multiple of the rounding factor that is greater than or equal to the current value.
+            </summary>
+        </member>
+        <member name="F:Autodesk.iLogic.Runtime.RoundingMethod.RoundDown">
+            <summary>
+            Round down to a multiple of the rounding factor that is less than or equal to the current value.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.MathString">
+            <summary>
+            Provides functions to convert between numbers and text strings, including formatting as fractions.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.MathString.FormatAsFraction(System.Double,System.Int32)">
+             <summary>
+             Formats a number as a fraction for inch measurements, with denominator as power of 2 (up to maximum of 128).
+             Return a fraction, or number and fraction (e.g. 3 5/8), or decimal number if the input is not
+             a power of 2 fraction (within 0.0000001)
+             </summary>
+             <param name="rVal">The number.</param>
+             <param name="numberOfDecimals">Number of decimal places for output (only used if it's not a fraction).</param>
+             <returns>Either a fractional string (e.g. 3 5/8) or a decimal string.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.MathString.FormatAsFraction(System.Double)">
+             <summary>
+             Formats a number as a fraction for inch measurements, with denominator as power of 2 (up to maximum of 128).
+             Return a fraction, or number and fraction (e.g. 3 5/8), or decimal number if the input is not
+             a power of 2 fraction (within 0.0000001)
+             </summary>
+             <param name="rVal">The number.</param>
+             <returns>Either a fractional string (e.g. 3 5/8) or a decimal string (with up to 3 digits to the right of the decimal separator).</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.MathString.RoundToFraction(System.Double,System.Double,Autodesk.iLogic.Runtime.RoundingMethod)">
+            <summary>
+            Formats a numeric value as a text string, in fraction form to represent inch measurements.
+            Returns a fraction(for example, "1/2"), or a number and fraction(for example, "3 5/8"). 
+            </summary>
+            <param name="rVal">The numeric value.</param>
+            <param name="fractionFactor">The level of precision wanted. Must be  1/2, 1/4, 1/8, 1/16, 1/32, 1/64, or 1/128.</param>
+            <param name="roundingMethod">The rounding method.</param>
+            <returns>A text string that represents the numeric value.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.MathString.CDblAny(System.String)">
+            <summary>
+            Like the standard CDbl function, this converts a string to a double-precision number.
+            But unlike CDbl, this will work on a string that uses either "." or "," as the decimal separator.
+            </summary>
+            <param name="numericString">A string that represents a number.</param>
+            <returns>The numeric value.</returns>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.ModelStateNameUtils">
+            <summary>
+            Provides functions to work with model state names.
+            (In English, Master will be most likely be renamed to Primary in a future release.)
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateNameUtils.IsPrimaryModelStateName(System.String)">
+            <summary>
+            Returns true if the name is a Primary model state name in any language.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.ModelStateNameUtils.CurrentPrimaryModelStateName">
+            <summary>
+            Gets the name of the Primary model state in the current language.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateNameUtils.GetLocalizedName(System.String)">
+            <summary>
+            If the name is the name of the Primary model state in any language,
+              then this returns the corresponding name in the current language.
+            Otherwise it returns the argument unchanged.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateNameUtils.GetExpressionForCapture(System.String)">
+            <summary>
+            If the name is the Primary model state name in the current language, this will return an expression
+            that gets the primary model state name in the current language.
+            (The expression will work in future, in whatever language is current at the time it is evaluated.)
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.ModelStateOperations">
+            <summary>
+            Model state operations that are called by functions in iLogic rule code.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateOperations.GetActiveModelStateName(Inventor.Document,System.String)">
+            <summary>
+            Returns the name of the active model state in the document.
+            If this is the system-generated Primary model state, the name will be localized.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateOperations.GetActiveModelStateNameWithNoExceptions(Inventor.Document)">
+            <summary>
+            Gets the name of the active model state.
+            If this is the system-generated Primary model state, the name will be localized.
+            Returns null if there is an exception.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateOperations.SetActiveModelStateName(Inventor.Document,System.String,Inventor.InventorServer,System.String)">
+            <summary>
+            This will accept a name in any language for the Primary (Master) model state.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateOperations.SetActiveModelStateName(Inventor.ComponentOccurrence,System.String,Inventor.InventorServer,System.String)">
+            <summary>
+            This will accept a name in any language for the Primary (Master) model state.
+            A localized name in the current language is preferred : performance will be better.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.ModelStatesGlobalScope">
+            <summary>
+            This object will set a document to all members edit scope.
+            When this object is disposed, the previous edit scope setting will be restored.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.ObjectTypeEditScopeEnum">
+            <summary>
+            iLogic object types for model state edit scope.
+            </summary>
+        </member>
+        <member name="F:Autodesk.iLogic.Runtime.ObjectTypeEditScopeEnum.All">
+            <summary>
+            No specific object type. This scope applies to any object that does not override it with a specific setting.
+            It is set on the iLogicVb object.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.ModelStateUtils">
+            <summary>
+            Utilities for documents and components with model states.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateUtils.GetFactoryDocument(Inventor.Document)">
+            <summary>
+            For a part or assembly, gets the factory document.
+            If the argument is not a member document, this returns the argument unchanged.
+            If the argument is a drawing, returns null.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.ModelStateUtils.GetModelStates(Inventor.Document)">
+            <summary>
+            Gets the ModelStates object. Can only be applied to a factory document.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Properties.Resources.List">
+            <summary>
+              Looks up a localized string similar to List.
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.AllowedMemberEditScopeValues">
+            <summary>
+              Looks up a localized string similar to The only values allowed for MemberEditScope are kEditActiveMember or kEditAllMembers..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.AssemblyHasNoModelStates">
+            <summary>
+              Looks up a localized string similar to {0}: The assembly &quot;{1}&quot; has no model states..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.BorderNotFound">
+            <summary>
+              Looks up a localized string similar to No drawing border was found with the name: &quot;{0}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.BorderNotFoundInFile">
+            <summary>
+              Looks up a localized string similar to In the file &quot;{0}&quot;, no border was found with the name: &quot;{1}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotChangeViewScale">
+             <summary>
+               Looks up a localized string similar to Cannot change the scale of the view: &quot;{0}&quot;.
+            (The scale of this view depends on its base view.).
+             </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotGetActiveModelStateInMember">
+            <summary>
+              Looks up a localized string similar to {0}: The active model state is not available in a member document. (Document name: &quot;{1}&quot;)..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotReadModelStatesInSuppressedComponent">
+             <summary>
+               Looks up a localized string similar to {0}: Cannot read the available model states in a suppressed component. 
+            (Component name: &quot;{1}&quot;).
+             </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotSaveTriggeredByParameterChange">
+             <summary>
+               Looks up a localized string similar to {0}: Cannot save the document when triggered by a parameter change.
+            You can only use this function in a rule that you run manually, or triggered by a different event.
+            .
+             </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotSetModelStateInComponentGeneralFailure">
+            <summary>
+              Looks up a localized string similar to {0}: Failed to set model state &quot;{1}&quot; in component &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotSetModelStateInComponentNotMember">
+            <summary>
+              Looks up a localized string similar to {0}: cannot set the model state in component: &quot;{1}&quot;. It is not a model state member..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotSetModelStateInDrawing">
+            <summary>
+              Looks up a localized string similar to {0}: Cannot set the model state in a drawing document. (Document name: {1})..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotSetModelStateInMemberDocument">
+            <summary>
+              Looks up a localized string similar to {0}: Cannot set the model state in a member document. (Document name: {1})..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.CannotSetModelStateVirtualComponent">
+             <summary>
+               Looks up a localized string similar to {0}: virtual components do not have model states.
+            (Component name: &quot;{1}&quot;).
+             </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ComponentIsSuppressed">
+            <summary>
+              Looks up a localized string similar to In the function {0}: The component named &quot;{1}&quot; is suppressed.  You must unsuppress it to use this function..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ComponentNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: The component named &quot;{1}&quot; was not found..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DocumentCannotSwitchToSubstitute">
+             <summary>
+               Looks up a localized string similar to {0}: this function cannot be used to switch to a substitute model state. 
+            (Model state name: &quot;{1}&quot;)..
+             </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DocumentIsNotADrawing">
+            <summary>
+              Looks up a localized string similar to {0}: This document &quot;{1}&quot; is not a drawing..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DrawingLayerNotFound">
+            <summary>
+              Looks up a localized string similar to No layer named &quot;{0}&quot; was found..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DrawingResourceFileCannotBeOpened">
+            <summary>
+              Looks up a localized string similar to {0}: The file &quot;{1}&quot; cannot be opened, or it is not a valid drawing..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DrawingResourceFileNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: No file was found with the name: &quot;{1}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DrawingSheetNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: No sheet named &quot;{1}&quot; was found..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.DrawingViewNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: No drawing view named &quot;{1}&quot; was found..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.LeastSignificantDimensionMustBeTwo">
+            <summary>
+              Looks up a localized string similar to The least significant dimension of the array must be two..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ModelStateNotFoundInComponent">
+            <summary>
+              Looks up a localized string similar to {0}: No model state named &quot;{1}&quot; was found in component &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ModelStateNotFoundInDocument">
+            <summary>
+              Looks up a localized string similar to {0}: No model state named &quot;{1}&quot; was found in document &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.PartHasNoModelStates">
+            <summary>
+              Looks up a localized string similar to {0}: The part &quot;{1}&quot; has no model states..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.RoundToFractionInvalid">
+            <summary>
+              Looks up a localized string similar to {0}:  The fraction you specified to round by is &quot;{1}&quot;.
+            It must be 1/2 or 1/4 or 1/8 or 1/16 etc..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.SecondRadioBoxLabelIsTheSame">
+            <summary>
+              Looks up a localized string similar to Error in InputRadioBox: the second button label &quot;{0}&quot; is the same as the first..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.SheetSizeNotValid">
+            <summary>
+              Looks up a localized string similar to {0}: The sheet size &quot;{1}&quot; is not a valid size..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ThisDocLaunchError">
+            <summary>
+              Looks up a localized string similar to An error occurred in {0}(&quot;{1}&quot;)..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ThisDocLaunchExtensionNotSupported">
+            <summary>
+              Looks up a localized string similar to {0}: This file extension is not supported: &quot;{1}&quot;.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.ThisDocLaunchFileNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: File not found: &quot;{1}&quot;.
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.TitleBlockNotFound">
+            <summary>
+              Looks up a localized string similar to No title block was found with the name: &quot;{0}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.TitleBlockNotFoundInFile">
+            <summary>
+              Looks up a localized string similar to In the file &quot;{0}&quot;, no title block was found with the name: &quot;{1}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.UcsNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: The user coordinate system named &quot;{1}&quot; was not found in the component &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.UcsNotFoundInDocument">
+            <summary>
+              Looks up a localized string similar to {0}: No UCS with the name &quot;{1}&quot; was found in the document &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="P:Autodesk.iLogic.Runtime.Resources.ExceptionMsgs.WorkPointOrNamedEntityNotFound">
+            <summary>
+              Looks up a localized string similar to {0}: The work point or the named entity &quot;{1}&quot; was not found in the component: &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="T:Autodesk.iLogic.Runtime.RunDialogs">
+            <summary>
+            Provides the InputListBox and InputRadioBox functions.
+            </summary>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputListBox(System.String,System.Collections.IEnumerable,System.Object,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Shows a dialog in which a single item can be chosen from a list.
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="ListItems">The list of items.</param>
+            <param name="DefaultValue">The default value.</param>
+            <param name="Title">The dialog title.</param>
+            <param name="ListName">The list title.</param>
+            <param name="Height">Dialog height in Device Independent Pixels. If this is zero, the width will be sized to fit the contents.</param>
+            <param name="Width">Dialog width in Device Independent Pixels. If this is zero, the width will be sized to fit the contents.</param>
+            <returns>The selected item, or Nothing if the dialog was cancelled.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputListBox(System.String,System.Collections.IEnumerable,System.Object,System.String,System.String)">
+            <summary>
+            Shows a dialog in which a single item can be chosen from a list.
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="ListItems">The list of items.</param>
+            <param name="DefaultValue">The default value.</param>
+            <param name="Title">The dialog title.</param>
+            <param name="ListName">The list title.</param>
+            <returns>The selected item, or Nothing if the dialog was cancelled.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputListBox(System.String,System.Collections.IEnumerable)">
+            <summary>
+            Shows a dialog in which a single item can be chosen from a list.
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="ListItems">The list of items.</param>
+            <returns>The selected item, or Nothing if the dialog was cancelled.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputListBox(System.String,System.Collections.IEnumerable,System.Object)">
+            <summary>
+            Shows a dialog in which a single item can be chosen from a list.
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="ListItems">The list of items.</param>
+            <param name="DefaultValue">The default value.</param>
+            <returns>The selected item, or Nothing if the dialog was cancelled.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputListBox(System.String,System.Collections.IEnumerable,System.Object,System.String)">
+            <summary>
+            Shows a dialog in which a single item can be chosen from a list.
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="ListItems">The list of items.</param>
+            <param name="DefaultValue">The default value.</param>
+            <param name="Title">The dialog title.</param>
+            <returns>The selected item, or Nothing if the dialog was cancelled.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputRadioBox(System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Shows a dialog in which a choice can be made between two options.
+            (Returns True if the first option was selected, and False otherwise.)
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="Button1Label">The label for the first option.</param>
+            <param name="Button2Label">The label for the second option.</param>
+            <param name="ChooseButton1">Set this to True to choose the first option by default.</param>
+            <param name="Title">The dialog title.</param>
+            <returns>True if the first option was selected. False otherwise.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputRadioBox(System.String,System.String,System.String)">
+            <summary>
+            Shows a dialog in which a choice can be made between two options.
+            (Returns True if the first option was selected, and False otherwise.)
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="Button1Label">The label for the first option.</param>
+            <param name="Button2Label">The label for the second option.</param>
+            <returns>True if the first option was selected. False otherwise.</returns>
+        </member>
+        <member name="M:Autodesk.iLogic.Runtime.RunDialogs.InputRadioBox(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Shows a dialog in which a choice can be made between two options.
+            (Returns True if the first option was selected, and False otherwise.)
+            </summary>
+            <param name="Prompt">A prompt to show in the dialog.</param>
+            <param name="Button1Label">The label for the first option.</param>
+            <param name="Button2Label">The label for the second option.</param>
+            <param name="ChooseButton1">Set this to True to choose the first option by default.</param>
+            <returns>True if the first option was selected. False otherwise.</returns>
+        </member>
+        <member name="M:iLogic.CadObjectUtil.GetObjectType(System.Object)">
+            <summary>
+            Helper method to get the type of an Inventor API object.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:iLogic.CadObjectUtil.GetPropertyValue(System.Object,System.String)">
+            <summary>
+            Get the value of the specified property of the object.
+            Returns null if it's not available.
+            </summary>
+            <param name="obj"></param>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -172,4 +172,10 @@
   <data name="RunRule_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RunRule_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Settings_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Settings_16x16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Settings_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Settings_32x32.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -36,7 +36,7 @@ namespace ExternalRuleManager
 
             // Enable and refresh the Inventor ribbon UI
             Globals.InvAppRibbon.UIEnable(Globals.InvApp.ActiveDocument);
-            Globals.InvAppRibbon.LoadRules();
+            Globals.InvAppRibbon.LoadExternalRules();
         }
 
         /// <summary>

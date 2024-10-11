@@ -1,13 +1,17 @@
 ﻿using VDF = Autodesk.DataManagement.Client.Framework;
 using ACW = Autodesk.Connectivity.WebServices;
 using File = System.IO.File;
-using System.Diagnostics;
 
 
 namespace ExternalRuleManager
 {
     internal class FileUtilities
     {
+
+        private const string TabName = "External Rule Manager";
+
+
+
         /// <summary>
         /// Makes a local copy of a selected external rule file from the Vault.
         /// </summary>
@@ -73,22 +77,22 @@ namespace ExternalRuleManager
                         }
                         else
                         {
-                            MessageBox.Show($"Cannot make copy, file already exists at destination: {destPath}", "External Rule Manager");
+                            MessageBox.Show($"Cannot make copy, file already exists at destination: {destPath}", TabName);
                         }
                     }
                     catch (IOException ex)
                     {
-                        MessageBox.Show($"I/O error during file copy: {ex.Message}", "External Rule Manager");
+                        MessageBox.Show($"I/O error during file copy: {ex.Message}", TabName);
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist on disk.", "External Rule Manager");
+                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist on disk.", TabName);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected error: {ex.Message}", "External Rule Manager");
+                MessageBox.Show($"Unexpected error: {ex.Message}", TabName);
             }
         }
 
@@ -130,10 +134,10 @@ namespace ExternalRuleManager
                 {
                     string sourceFile = filePathAbs.FullPath;
                     string pathWithoutExt = System.IO.Path.GetFileNameWithoutExtension(sourceFile);
-                    string destFile = $"{pathWithoutExt}_{username}{System.IO.Path.GetExtension(sourceFile)}";
+                    string destFile = $"{pathWithoutExt}_{username}{Path.GetExtension(sourceFile)}";
                     string folderPath = filePathAbs.FolderPath;
                     string destPath = System.IO.Path.Combine(folderPath, destFile);
-                    Debug.Print(destPath);
+
 
                     // Ensure destination folder is valid
                     if (!Directory.Exists(folderPath))
@@ -153,7 +157,7 @@ namespace ExternalRuleManager
                             }
                             else
                             {
-                                DialogResult result = MessageBox.Show($"Vaulted version is not checked out, do you still wish to overwrite?", "External Rule Manager", MessageBoxButtons.YesNo);
+                                DialogResult result = MessageBox.Show($"Vaulted version is not checked out, do you still wish to overwrite?", TabName, MessageBoxButtons.YesNo);
 
                                 if (result == DialogResult.Yes)
                                 {
@@ -163,22 +167,22 @@ namespace ExternalRuleManager
                         }
                         else
                         {
-                            MessageBox.Show($"File does not exist on disk: {destPath}", "External Rule Manager");
+                            MessageBox.Show($"File does not exist on disk: {destPath}", TabName);
                         }
                     }
                     catch (IOException ex)
                     {
-                        MessageBox.Show($"I/O error during file copy: {ex.Message}", "External Rule Manager");
+                        MessageBox.Show($"I/O error during file copy: {ex.Message}", TabName);
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist on disk.", "External Rule Manager");
+                    MessageBox.Show($"Source file '{filePathAbs.FullPath}' does not exist on disk.", TabName);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected error: {ex.Message}", "External Rule Manager");
+                MessageBox.Show($"Unexpected error: {ex.Message}", TabName);
             }
         }
 
@@ -202,16 +206,17 @@ namespace ExternalRuleManager
                     targetFileInfo.IsReadOnly = false;
                 }
 
+               
                 // Use File.Replace
                 File.Replace(sourceFile, targetFile, null); 
             }
             catch (FileNotFoundException ex)
             {
-                MessageBox.Show($"Target file not found: {ex.Message}", "External Rule Manager");
+                MessageBox.Show($"Target file not found: {ex.Message}", TabName);
             }
             catch (IOException ex)
             {
-                MessageBox.Show($"I/O error during file replace: {ex.Message}", "External Rule Manager");
+                MessageBox.Show($"I/O error during file replace: {ex.Message}", TabName);
             }
         }
     }

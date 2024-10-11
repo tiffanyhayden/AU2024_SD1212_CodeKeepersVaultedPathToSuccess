@@ -1,4 +1,5 @@
-﻿using Inventor;
+﻿using Autodesk.iLogic.Interfaces;
+using Inventor;
 using static ExternalRuleManager.ImageConverter;
 
 namespace ExternalRuleManager
@@ -197,6 +198,84 @@ namespace ExternalRuleManager
             }
 
             return existingDef != null;
+        }
+
+        /// <summary>
+        /// Sets the external rule directory for the application based on the provided path or a default path if available.
+        /// If the specified path does not exist, it will be created.
+        /// </summary>
+        /// <param name="selectedPath">The path selected by the user to set as the external rule directory.</param>
+        /// <remarks>
+        /// This method retrieves the current external rule directories from the active document and checks their validity.
+        /// - If the current directories are invalid or empty, it attempts to use a default path defined in <c>Globals.ExternalRuleDir</c>.
+        /// - If the default path does not exist, the method will create it.
+        /// - If the provided <paramref name="selectedPath"/> is not valid, it will also attempt to create that directory.
+        /// - If neither path can be created, the user is prompted with a warning message.
+        /// </remarks>
+        public static void SetExternalRuleDirectory(string selectedPath)
+        {
+            // Get the Standard Object Provider (SOP) for the active document
+            IStandardObjectProvider SOP = StandardObjectFactory.Create(Globals.InvApp.ActiveDocument);
+
+            // Get the current external rule directories setting
+            string[] currentExternalRuleDirs = SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories;
+
+            // Check if the array is empty or contains invalid paths
+            if (currentExternalRuleDirs == null || !currentExternalRuleDirs.Any(Directory.Exists))
+            {
+                // If the array is empty or no valid paths are found, use the default path if it exists
+                if (!Directory.Exists(Globals.ExternalRuleDir))
+                {
+                    // If the default path does not exist, create it
+                    try
+                    {
+                        Directory.CreateDirectory(Globals.ExternalRuleDir);
+                        SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = new string[] { Globals.ExternalRuleDir };
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to create the default directory: {ex.Message}",
+                                        "Directory Creation Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = new string[] { Globals.ExternalRuleDir };
+                }
+            }
+            else if (!Directory.Exists(selectedPath))
+            {
+                // If the selected path is not valid, try creating it
+                try
+                {
+                    Directory.CreateDirectory(selectedPath);
+                    Globals.ExternalRuleDir = selectedPath;
+                    SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = new string[] { Globals.ExternalRuleDir };
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to create the selected directory: {ex.Message}",
+                                    "Directory Creation Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                // If the directory is already set, ensure it's valid
+                bool isValidPath = currentExternalRuleDirs.Any(Directory.Exists);
+                if (!isValidPath)
+                {
+                    MessageBox.Show("The currently set external rules directory is invalid. Please set a valid directory.",
+                                    "Invalid Path",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
