@@ -9,3 +9,4 @@
   <file name="ExternalRuleManager.dll" hashalg="SHA1"></file>
 
 </assembly>
+

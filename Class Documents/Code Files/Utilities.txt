@@ -14,18 +14,18 @@ namespace ExternalRuleManager
             Image LargeIcon = null)
         {
 
-            Inventor.ButtonDefinition? exitingDef = null;
+            Inventor.ButtonDefinition? existingDef = null;
 
             try
             {
-                exitingDef = Globals.InvApp.CommandManager.ControlDefinitions[InternalName] as ButtonDefinition;
+                existingDef = Globals.InvApp.CommandManager.ControlDefinitions[InternalName] as ButtonDefinition;
             }
             catch (Exception)
             {
 
             }
 
-            if (exitingDef != null)
+            if (existingDef != null)
 
             {
                 //Add message box for user maybe? 
