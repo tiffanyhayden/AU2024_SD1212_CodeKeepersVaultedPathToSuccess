@@ -251,9 +251,14 @@ namespace ExternalRuleManager
                 // If the selected path is not valid, try creating it
                 try
                 {
-                    Directory.CreateDirectory(selectedPath);
-                    Globals.ExternalRuleDir = selectedPath;
-                    SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = new string[] { Globals.ExternalRuleDir };
+                    if (selectedPath != "")
+                    {
+                        Directory.CreateDirectory(selectedPath);
+                        Globals.ExternalRuleDir = selectedPath;
+                        SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = new string[] { Globals.ExternalRuleDir };
+                    }
+                    
+
                 }
                 catch (Exception ex)
                 {
