@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\standardaddinserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\standardaddinserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\customribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\customribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\inventoreventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\inventoreventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\utilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\utilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\customribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\customribbon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaulteventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaulteventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultfileutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultfileutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\standardaddinserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\standardaddinserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\globals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,11 +27,8 @@
       "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\fileutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaulteventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaulteventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultlifecycleutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -52,6 +37,37 @@
     {
       "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultfolderutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultfolderutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultfileutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultfileutilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\externalrulemanager.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\externalrulemanager.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\externalrulemanager.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\externalrulemanager.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\externalrulemanager.x.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\externalrulemanager.x.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\autodesk.externalrulemanager.inventor.addin||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\autodesk.externalrulemanager.inventor.addin||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\inventoreventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\inventoreventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\vaultconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|solutionrelative:externalrulemanager\\vaultconn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE0A9AD4-C788-46D6-ADFD-C4B23E604F44}|ExternalRuleManager\\ExternalRuleManager.csproj|c:\\users\\tiffanyhayden\\documents\\github\\au2024_sd1212_codekeepersvaultedpathtosuccess\\externalrulemanager final  (final class add-in) c sharp\\externalrulemanager\\imageconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -65,7 +81,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -73,7 +89,57 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
+              "Title": "ExternalRuleManager",
+              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.csproj",
+              "RelativeDocumentMoniker": "ExternalRuleManager\\ExternalRuleManager.csproj",
+              "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.csproj",
+              "RelativeToolTip": "ExternalRuleManager\\ExternalRuleManager.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-12T16:46:26.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ExternalRuleManager.csproj",
+              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.csproj",
+              "RelativeDocumentMoniker": "ExternalRuleManager\\ExternalRuleManager.csproj",
+              "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.csproj",
+              "RelativeToolTip": "ExternalRuleManager\\ExternalRuleManager.csproj",
+              "ViewState": "AgIAABcAAAAAAAAAAABxwAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-07T21:04:51.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ExternalRuleManager.X.manifest",
+              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.X.manifest",
+              "RelativeDocumentMoniker": "ExternalRuleManager\\ExternalRuleManager.X.manifest",
+              "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ExternalRuleManager.X.manifest",
+              "RelativeToolTip": "ExternalRuleManager\\ExternalRuleManager.X.manifest",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001203|",
+              "WhenOpened": "2024-11-07T20:55:32.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Autodesk.ExternalRuleManager.Inventor.addin",
+              "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "RelativeDocumentMoniker": "ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "RelativeToolTip": "ExternalRuleManager\\Autodesk.ExternalRuleManager.Inventor.addin",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000072|",
+              "WhenOpened": "2024-11-07T20:54:47.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -81,11 +147,12 @@
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ViewState": "AgIAALsTAAAAAAAAAAAewNITAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-10-03T14:06:28.668Z"
+              "WhenOpened": "2024-10-03T14:06:28.668Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 7,
               "Title": "VaultLifecycleUtilities.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultLifecycleUtilities.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\VaultLifecycleUtilities.cs",
@@ -93,43 +160,47 @@
               "RelativeToolTip": "ExternalRuleManager\\VaultLifecycleUtilities.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T22:13:07.258Z"
+              "WhenOpened": "2024-10-02T22:13:07.258Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "VaultFileUtilities.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultFileUtilities.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\VaultFileUtilities.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultFileUtilities.cs",
               "RelativeToolTip": "ExternalRuleManager\\VaultFileUtilities.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAxwMkBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMkBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T22:08:32.154Z"
+              "WhenOpened": "2024-10-02T22:08:32.154Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "VaultEventHandler.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultEventHandler.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\VaultEventHandler.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultEventHandler.cs",
               "RelativeToolTip": "ExternalRuleManager\\VaultEventHandler.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAACYAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T22:07:46.045Z"
+              "WhenOpened": "2024-10-02T22:07:46.045Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 15,
               "Title": "VaultConn.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultConn.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\VaultConn.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultConn.cs",
               "RelativeToolTip": "ExternalRuleManager\\VaultConn.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAlwD4AAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAIA5wD4AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T22:06:24.046Z"
+              "WhenOpened": "2024-10-02T22:06:24.046Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -139,27 +210,27 @@
               "RelativeDocumentMoniker": "ExternalRuleManager\\Utilities.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\Utilities.cs",
               "RelativeToolTip": "ExternalRuleManager\\Utilities.cs",
-              "ViewState": "AgIAAPAAAAAAAAAAAAAjwPsAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAiwBwBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T22:04:39.656Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "StandardAddInServer.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\StandardAddInServer.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\StandardAddInServer.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\StandardAddInServer.cs",
               "RelativeToolTip": "ExternalRuleManager\\StandardAddInServer.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwC0AAABRAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAswCgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T22:01:22.767Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 14,
               "Title": "InventorEventHandler.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\InventorEventHandler.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\InventorEventHandler.cs",
@@ -172,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "ImageConverter.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\ImageConverter.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\ImageConverter.cs",
@@ -180,60 +251,64 @@
               "RelativeToolTip": "ExternalRuleManager\\ImageConverter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAG4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T21:56:39.285Z"
+              "WhenOpened": "2024-10-02T21:56:39.285Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "Globals.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\Globals.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\Globals.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\Globals.cs",
               "RelativeToolTip": "ExternalRuleManager\\Globals.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAtwIsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T21:52:42.089Z"
+              "WhenOpened": "2024-10-02T21:52:42.089Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "FileUtilities.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\FileUtilities.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\FileUtilities.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\FileUtilities.cs",
               "RelativeToolTip": "ExternalRuleManager\\FileUtilities.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T21:39:22.586Z"
+              "WhenOpened": "2024-10-02T21:39:22.586Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "CustomRibbon.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\CustomRibbon.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\CustomRibbon.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\CustomRibbon.cs",
               "RelativeToolTip": "ExternalRuleManager\\CustomRibbon.cs",
-              "ViewState": "AgIAAJ4AAAAAAAAAAAAQwK0AAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAACUBAAAAAAAAAAAhwEIBAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-14T21:06:15.161Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "VaultUtilities.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultUtilities.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\VaultUtilities.cs",
               "ToolTip": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultUtilities.cs",
               "RelativeToolTip": "ExternalRuleManager\\VaultUtilities.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAQwDYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T22:16:22.928Z"
+              "WhenOpened": "2024-10-02T22:16:22.928Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 8,
               "Title": "VaultFolderUtilities.cs",
               "DocumentMoniker": "C:\\Users\\TiffanyHayden\\Documents\\GitHub\\AU2024_SD1212_CodeKeepersVaultedPathToSuccess\\ExternalRuleManager Final  (Final Class Add-In) C Sharp\\ExternalRuleManager\\VaultFolderUtilities.cs",
               "RelativeDocumentMoniker": "ExternalRuleManager\\VaultFolderUtilities.cs",
@@ -241,7 +316,8 @@
               "RelativeToolTip": "ExternalRuleManager\\VaultFolderUtilities.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T22:11:28.437Z"
+              "WhenOpened": "2024-10-02T22:11:28.437Z",
+              "EditorCaption": ""
             }
           ]
         }

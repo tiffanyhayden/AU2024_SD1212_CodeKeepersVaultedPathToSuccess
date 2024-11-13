@@ -1,4 +1,5 @@
-﻿using ACW = Autodesk.Connectivity.WebServices;
+﻿using System.Diagnostics;
+using ACW = Autodesk.Connectivity.WebServices;
 
 
 namespace ExternalRuleManager
@@ -23,7 +24,31 @@ namespace ExternalRuleManager
                 ACW.DocumentService? docService = webServiceManager.DocumentService;
                 ACW.File[]? files = docService.GetLatestFilesByFolderId(folder.Id, false);
 
-                return files;
+                // If files are found in the main folder, return them
+                if (files != null && files.Length > 0)
+                {
+                    return files;
+                }
+
+
+                long[] subfolderIds = docService.GetFolderIdsByParentIds(new long[] { (long)folder.Id }, true);
+
+
+                List<ACW.File> allFiles = new List<ACW.File>();
+
+                foreach (long subfolderId in subfolderIds)
+                {
+                    // Retrieve files in each subfolder
+                    ACW.File[]? subfolderFiles = docService.GetLatestFilesByFolderId(subfolderId, false);
+                    if (subfolderFiles != null)
+                    {
+                        allFiles.AddRange(subfolderFiles);
+                    }
+                }
+
+                // Return files from subdirectories if any were found, otherwise return null
+                return allFiles.Count > 0 ? allFiles.ToArray() : null;
+
             }
 
             return null;

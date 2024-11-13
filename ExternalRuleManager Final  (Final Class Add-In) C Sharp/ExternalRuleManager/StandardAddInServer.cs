@@ -23,6 +23,7 @@ namespace ExternalRuleManager
         /// </summary>
         public StandardAddInServer()
         {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         }
 
         #region ApplicationAddInServer Members
@@ -36,7 +37,7 @@ namespace ExternalRuleManager
         public void Activate(Inventor.ApplicationAddInSite addInSiteObject, bool firstTime)
         {
             // Initialize AddIn members.
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            
             Globals.InvApp = addInSiteObject.Application;
             Globals.InvAppEvents = new InventorEventHandler();
             Globals.VaultAppEvents = new VaultEventHandler();

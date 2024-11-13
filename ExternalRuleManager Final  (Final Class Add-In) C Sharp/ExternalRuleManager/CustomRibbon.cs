@@ -31,7 +31,9 @@ namespace ExternalRuleManager
         public ButtonDefinition Refresh { get; set; }
         public ButtonDefinition RunRule { get; set; }
 
-        public ButtonDefinition SetExternalRulePath { get; set; }   
+        public ButtonDefinition SetExternalRulePath { get; set; }
+
+        public ButtonDefinition ClearExternalRulePath { get; set; }
 
         private RibbonTab _externalRuleManagerRibbonTab;
         
@@ -123,6 +125,9 @@ namespace ExternalRuleManager
             SetExternalRulePath = Utilities.CreateButtonDef("Set External Rule Path", "SetExternalRulePath", "", _setRule16x16, _setRule32x32);
             SetExternalRulePath.OnExecute += SetExternalRulePath_OnExecute;
 
+            ClearExternalRulePath = Utilities.CreateButtonDef("Clear External Rule Path", "ClearExternalRulePath", "", _setRule16x16, _setRule32x32);
+            ClearExternalRulePath.OnExecute += ClearExternalRulePath_OnExecute;
+
             Refresh = Utilities.CreateButtonDef("Refresh", "CustomRefresh", "", _refresh16x16, _refresh32x32);
             Refresh.OnExecute += Refresh_OnExecute;
 
@@ -209,6 +214,7 @@ namespace ExternalRuleManager
             // Add command controls to ribbon panels
             _manageRibbonPanel.CommandControls.AddComboBox(ExternalRules);
             _manageRibbonPanel.CommandControls.AddButton(SetExternalRulePath);
+            _manageRibbonPanel.CommandControls.AddButton(ClearExternalRulePath);
             _manageRibbonPanel.CommandControls.AddButton(Refresh, true);
             _manageRibbonPanel.CommandControls.AddButton(RunRule, true);
             
@@ -264,6 +270,21 @@ namespace ExternalRuleManager
         {
             RefreshUI();
 
+            Inventor.Document activeDoc = Globals.InvApp.ActiveDocument;
+
+            if (activeDoc == null)
+            {
+
+                System.Windows.Forms.MessageBox.Show("No active document is open. Please open a document before clearing the external rule path.",
+                                     "No Active Document",
+                                     System.Windows.Forms.MessageBoxButtons.OK,
+                                     System.Windows.Forms.MessageBoxIcon.Warning);
+
+                return;
+
+            }
+
+
             // Create a new instance of the FolderBrowserDialog
             using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
 
@@ -285,12 +306,41 @@ namespace ExternalRuleManager
 
                     SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = [selectedPath];
 
-                    // Perform actions with the selected folder path
-                    //MessageBox.Show($"Selected folder: {selectedPath}", "Folder Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 
+            
+
         }
+
+
+        private void ClearExternalRulePath_OnExecute(NameValueMap context)
+        {
+            RefreshUI();
+
+            Inventor.Document activeDoc = Globals.InvApp.ActiveDocument;
+
+            if (activeDoc == null)
+            {
+
+                System.Windows.Forms.MessageBox.Show("No active document is open. Please open a document before clearing the external rule path.",
+                                     "No Active Document",
+                                     System.Windows.Forms.MessageBoxButtons.OK,
+                                     System.Windows.Forms.MessageBoxIcon.Warning);
+
+                return;
+
+            }
+
+
+            string[] strPaths = new string[0];
+            IStandardObjectProvider SOP = StandardObjectFactory.Create(Globals.InvApp.ActiveDocument);
+
+            SOP.iLogicVb.Automation.FileOptions.ExternalRuleDirectories = strPaths;
+
+        }
+
+
 
         /// <summary>
         /// Retrieves the latest version of all external rules and refreshes the user interface.
