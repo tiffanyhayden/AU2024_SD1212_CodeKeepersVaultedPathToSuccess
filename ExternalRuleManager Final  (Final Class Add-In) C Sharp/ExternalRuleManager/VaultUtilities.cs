@@ -30,15 +30,17 @@ namespace ExternalRuleManager
                     return files;
                 }
 
-
+                // Get sub folders for parent external rule folder. 
                 long[] subfolderIds = docService.GetFolderIdsByParentIds(new long[] { (long)folder.Id }, true);
 
-
+                //collect all the files within sub folders
                 List<ACW.File> allFiles = new List<ACW.File>();
 
+
+                //Loop through sub folders and get the files associated with sub folders. 
                 foreach (long subfolderId in subfolderIds)
                 {
-                    // Retrieve files in each subfolder
+                    // Retrieve files in each subfolder skip hidden folders. 
                     ACW.File[]? subfolderFiles = docService.GetLatestFilesByFolderId(subfolderId, false);
                     if (subfolderFiles != null)
                     {
